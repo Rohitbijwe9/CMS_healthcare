@@ -11,7 +11,7 @@ class Disease(models.Model):
     disease_category = models.CharField(max_length=50)
     denied_reason = models.CharField(max_length=50)
     is_disease_covered = models.BooleanField(default=False)
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='person_diseases')
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patient_diseases')
     claim = models.ForeignKey(Claim, on_delete=models.CASCADE, related_name='claim_disease')
 
 

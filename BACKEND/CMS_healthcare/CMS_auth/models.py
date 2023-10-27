@@ -22,6 +22,6 @@ class User(AbstractUser):
     user_image = models.ImageField(upload_to='user/',blank=True)
     is_active = models.BooleanField(default=True)
     created_on = models.DateTimeField(auto_now_add=True,editable=False)
-    contact_details = models.OneToOneField(ContactDetails,on_delete=models.CASCADE,related_name='')
-    service_provider = models.ForeignKey(ServiceProvider,on_delete=models.CASCADE,related_name='')
+    contact_details = models.OneToOneField(ContactDetails,on_delete=models.CASCADE,related_name='contact_details')
+    service_provider = models.ForeignKey(ServiceProvider,on_delete=models.CASCADE,related_name='service_provider')
     updated_on = models.DateTimeField(blank=True,null=True)

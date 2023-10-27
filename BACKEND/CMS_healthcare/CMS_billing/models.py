@@ -2,6 +2,7 @@ from django.db import models
 from CMS_patient_registration.models import Claim, AddressDetails
 from phonenumber_fields.modelfields import PhoneNumberField
 from CMS_patient_sheduling.models import ServiceProvider
+from .models import Insurance
 
 from CMS_patient_registration.models import Claim, AddressDetails
 

@@ -37,6 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'CMS_auth',
+    'CMS_billing',
+    'CMS_HC_application',
+    'CMS_patient_registration',
+    'CMS_patient_sheduling',
+    'CMS_treatment',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'phonenumber_field',
+
 ]
 
 MIDDLEWARE = [

@@ -1,10 +1,6 @@
 from django.db import models
-from CMS_patient_registration.models import Claim, AddressDetails
-from phonenumber_fields.modelfields import PhoneNumberField
+from phonenumber_field.modelfields import PhoneNumberField
 from CMS_patient_sheduling.models import ServiceProvider
-from .models import Insurance
-
-from CMS_patient_registration.models import Claim, AddressDetails
 
 
 class HospitalExpenses(models.Model):
@@ -17,7 +13,7 @@ class HospitalExpenses(models.Model):
     other_charges = models.FloatField(default=0.0)
     total_charges = models.CharField(max_length=20)
     service_provider_code = models.CharField(max_length=20)
-    claim = models.OneToOneField(Claim, on_delete=models.CASCADE, related_name="claim_hospital")
+    claim = models.OneToOneField('CMS_patient_registration.Claim', on_delete=models.CASCADE, related_name="claim_hospital")
 
 
 class NomineeDetails(models.Model):
@@ -25,16 +21,14 @@ class NomineeDetails(models.Model):
     nominee_name = models.CharField(max_length=255)
     relation_with_insurance_payer = models.CharField(max_length=255)
     nominee_date_of_birth = models.DateField()
-    nominee_mobile_number = models.PhoneNumberField(region='IN')
-    insurance = models.OneToOneField(Insurance, on_delete=models.CASCADE,blank=True)
-
+    nominee_mobile_number = PhoneNumberField(region='IN')
 
 
 class InsurancePayerDetails(models.Model):
     insurance_payer_identifer=models.BigAutoField(primary_key=True)
     insurance_payer_name=models.CharField(max_length=40)
     insurance_payer_code=models.CharField(max_length=20)
-    address_details=models.OneToOneField(AddressDetails,on_delete=models.CASCADE,related_name='insurance_payer_name')
+    address_details=models.OneToOneField('CMS_patient_registration.AddressDetails',on_delete=models.CASCADE,related_name='insurance_payer_name')
 
 
 class Insurance(models.Model):
@@ -79,7 +73,7 @@ class PaymentInfo(models.Model):
     to_branch_name = models.CharField(max_length=100)
     to_ifsc_code = models.CharField(max_length=20)
     to_bank_name = models.CharField(max_length=100)
-    denied_reason = models.CharField(blank=True, null=True)
+    denied_reason = models.TextField(blank=True, null=True)
     remark = models.TextField(blank=True, null=True)
     total_amount = models.FloatField(default=0.0)
     claim_amount = models.FloatField(default=0.0)
@@ -94,8 +88,8 @@ class ServiceProviderBill(models.Model):
     title = models.CharField(max_length=20)
     amount = models.FloatField(default=0.0)
     bill_image = models.ImageField(upload_to='bill_images/')
-    service_provider = models.ForeignKey(ServiceProvider,on_delete=models.CASCADE,related_name='service_provider')
-    claim = models.ForeignKey(Claim,on_delete=models.CASCADE,related_name='claim_bills')
+    service_provider = models.ForeignKey(ServiceProvider,on_delete=models.CASCADE,related_name='service_provider_bills')
+    claim = models.ForeignKey('CMS_patient_registration.Claim',on_delete=models.CASCADE,related_name='claim_bills')
 
 class TransactionDetails(models.Model):
     transaction_identifier =models.BigAutoField(primary_key=True)

@@ -42,13 +42,14 @@ INSTALLED_APPS = [
     'CMS_HC_application',
     'CMS_patient_registration',
     'CMS_patient_sheduling',
-    'CMS_treatment',
+    'CMS_tratment',
     'rest_framework',
     'rest_framework_simplejwt',
     'phonenumber_field',
 
 ]
 
+AUTH_USER_MODEL = 'CMS_auth.User'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -86,7 +87,7 @@ WSGI_APPLICATION = 'CMS_healthcare.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'CMS_helthcare',
+        'NAME': 'CMS_healthcare',
         'USER':'root',
         'PASSWORD':'root',
     }

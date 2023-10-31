@@ -42,11 +42,14 @@ INSTALLED_APPS = [
     'CMS_HC_application',
     'CMS_patient_registration',
     'CMS_patient_sheduling',
-    'CMS_treatment',
+    'CMS_tratment',
     'rest_framework',
     'rest_framework_simplejwt',
     'phonenumber_field',
+    
 ]
+
+AUTH_USER_MODEL = 'CMS_auth.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,6 +130,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL='/imade/download/'
+MEDIA_ROOT= BASE_DIR
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

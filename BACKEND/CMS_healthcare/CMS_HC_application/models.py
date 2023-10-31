@@ -16,5 +16,5 @@ class Appointment(models.Model):
     appointment_time=models.TimeField()
     reason_of_appointment=models.TextField()
     appointment_for=models.CharField(max_length=70)
-    contact_details=models.OneToOneField(ContactDetails,on_delete=models.CASCADE,related_name='contact_details')
+    contact_details=models.OneToOneField(ContactDetails,on_delete=models.CASCADE,related_name='appointment_contact_details')
     

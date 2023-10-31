@@ -48,8 +48,7 @@ class Insurance(models.Model):
     nominee_details=models.OneToOneField(NomineeDetails,on_delete=models.CASCADE,related_name='insurance_identifier')
     insurance_payer_details=models.OneToOneField(InsurancePayerDetails,on_delete=models.CASCADE,related_name='insurance_payer_details')
 
-
-
+######################################################################
 
 
 class Ledger(models.Model):

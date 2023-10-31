@@ -68,7 +68,8 @@ class BankDetails (models.Model):
     bank_name = models.CharField(max_length=50)
     branch_name = models.CharField(max_length=30)
     ifsc_code = models.CharField(max_length=20)
-
+    
+##########################################################################
 
 class Claim(models.Model):
 

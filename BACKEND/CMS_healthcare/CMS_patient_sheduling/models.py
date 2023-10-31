@@ -1,5 +1,5 @@
 from django.db import models
-from CMS_patient_registration.models import AddressDetails,Claim
+
 from CMS_HC_application.models import ContactDetails
 
 class ServiceProvider(models.Model):
@@ -9,8 +9,8 @@ class ServiceProvider(models.Model):
     hospital_identifier = models.CharField(max_length=20)
     hospital_type = models.CharField(max_length=20)
     hospital_registration_number= models.CharField(max_length=20,unique=True)
-    address_details = models.OneToOneField(AddressDetails,on_delete=models.CASCADE,related_name='address_details')
-    contact_details = models.OneToOneField(ContactDetails,on_delete=models.CASCADE,related_name='contact_details')
+    address_details = models.OneToOneField('CMS_patient_registration.AddressDetails',on_delete=models.CASCADE,related_name='address_details')
+    contact_details = models.OneToOneField(ContactDetails,on_delete=models.CASCADE,related_name='service_provider_contact_details')
     
     
 
@@ -26,5 +26,5 @@ class RoomCategory(models.Model):
     room_category_identifier = models.BigAutoField(primary_key=True)
     room_category_name = models.CharField(max_length=20,choices=ROOM_CATEGORY_NAME,default='general_ward')
     service_provider = models.ForeignKey(ServiceProvider,on_delete=models.CASCADE,related_name='serviceprovider')
-    claim = models.OneToOneField(Claim,on_delete=models.CASCADE,related_name='room_claim')
+    claim = models.OneToOneField('CMS_patient_registration.Claim',on_delete=models.CASCADE,related_name='room_claim')
 

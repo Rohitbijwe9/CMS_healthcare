@@ -42,11 +42,13 @@ INSTALLED_APPS = [
     'CMS_HC_application',
     'CMS_patient_registration',
     'CMS_patient_sheduling',
-    'CMS_treatment',
+    'CMS_tratment',
     'rest_framework',
     'rest_framework_simplejwt',
     'phonenumber_field',
 ]
+
+AUTH_USER_MODEL = 'CMS_auth.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

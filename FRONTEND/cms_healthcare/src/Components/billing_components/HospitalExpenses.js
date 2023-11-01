@@ -44,6 +44,8 @@ export default function HosoitalExpenses() {
       <label htmlFor='claim'>Claim</label><br/>
       <input type='text' id='claim' placeholder='claim' className='form-control'/><br/>
 
+      
+
       <input type='submit' className='btn btn-outline-success' value={'SAVE DATA'}/>
 
 

@@ -29,7 +29,6 @@ import Navbar from '../Components/navbar/Navbar'
 export default function HealthCareAppRoutes() {
   return (
    <>
-    <GuestNavbar/>
 
    <Routes>
     <Route path='/aboutus' element={<About/>}/>

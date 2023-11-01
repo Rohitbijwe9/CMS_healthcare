@@ -57,7 +57,6 @@ export default function GuestNavbar() {
       <Header />
       <div className="container" style={{ marginTop: '60px',height:'500px' }}><br/>
        
-        <center><h1>Emergency?</h1><button className='btn btn-warning'>Take Appointment</button></center><br/>
         
 
 

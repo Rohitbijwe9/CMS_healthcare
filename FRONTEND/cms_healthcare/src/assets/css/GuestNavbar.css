@@ -1,5 +1,5 @@
 body {
-    background-image: url(./assets/images/Home.jpg);
+    background-image: url(../images/Home.jpg);
       background-size: 90% 80%; /* Set the width and height to 100% */
       background-repeat: no-repeat; /* Prevent the image from repeating */
       background-attachment: fixed; /* Optional: Keep the image fixed within the viewport */

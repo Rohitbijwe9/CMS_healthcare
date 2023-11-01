@@ -1,6 +1,6 @@
 import React from 'react'
 import{Route, Routes} from 'react-router-dom'
-import User from '../Components/CMS_auth_components/CMS_billing_components/CMS_hc_application_components/User'
+
 import HospitalExpenses from '../Components/CMS_billing_components/HospitalExpenses'
 import InsurancePayerDetails from '../Components/CMS_billing_components/InsurancePayerDetails'
 import Insurence from '../Components/CMS_billing_components/Insurence'
@@ -18,6 +18,7 @@ import Patient from '../Components/CMS_patient_registration_components/Patient'
 import RoomCategory from '../Components/CMS_patient_sheduling_components/RoomCategory'
 import Disease from '../Components/CMS_treatment_components/Disease'
 import DiseaseDocument from '../Components/CMS_treatment_components/DiseaseDocument'
+import User from '../Components/CMS_auth_components/billing_components/hc_application_components/User'
 
 export default function HealthCareAppRoutes() {
   return (

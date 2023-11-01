@@ -18,10 +18,12 @@ export default function RoomCategory() {
       <input type='number' id='rci' placeholder='enter room category identifier' className='form-control'/><br/>
 
       <label htmlFor='rcn'><b>Room Category Name</b></label><br/>
-      <input type='text' id='rcn' placeholder='eg icu,general_ward,special_ward' className='form-control'/><br/>
+        <input type='radio' id='rcn' value='icu'/>ICU<b></b><br/><br/>
+        <input type='radio' id='rcn' value='general_ward'/>General ward<b></b><br/><br/>
+        <input type='radio' id='rcn' value='special_ward'/>Special Ward<b></b><br/><br/>
 
       <label htmlFor='sp'><b>Service Provider</b></label><br/>
-      <input type='number' id='sp' placeholder='enter service provider' className='form-control'/><br/>
+      <input type='' id='sp' placeholder='enter service provider' className='form-control'/><br/>
 
       <label htmlFor='claim'><b>Claim</b></label><br/>
       <input type='text' id='claim' placeholder='claim' className='form-control'/><br/>

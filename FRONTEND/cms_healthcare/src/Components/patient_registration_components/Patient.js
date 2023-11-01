@@ -1,12 +1,12 @@
 import React from 'react'
-import {useform} from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 import axios from 'axios';
 
 
 
 export default function Patient() {
 
-  const{register,handleSubmit}=useform();
+  const{register,handleSubmit}=useForm();
 
   function savedata(data)
   {
@@ -98,6 +98,9 @@ export default function Patient() {
 
       <label htmlFor='padd'>Patient Address</label><br/>
       <input type='text' id='padd' placeholder='enter patientaddress' className='form-control'/><br/>
+
+      <input type='submit' className='btn btn-outline-success' value={'SAVE DATA'}/>
+
 
 
 </form>

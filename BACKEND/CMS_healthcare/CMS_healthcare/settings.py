@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'CMS_healthcare.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'CMS_helthcare',
+        'NAME': 'CMS_healthcare',
         'USER':'root',
         'PASSWORD':'root',
     }

@@ -18,10 +18,20 @@ import Patient from '../Components/patient_registration_components/Patient'
 import RoomCategory from '../Components/patient_sheduling_components/RoomCategory'
 import Disease from '../Components/treatment_components/Disease'
 import DiseaseDocument from '../Components/treatment_components/DiseaseDocument'
+import Header from '../Components/Layout/Header'
+import Footer from '../Components/Layout/Footer'
+import Home from '../Components/Layout/Home'
+import About from '../Components/Layout/About'
+import Contact from '../Components/Layout/Contact'
+
+
+
+
 
 export default function HealthCareAppRoutes() {
   return (
    <>
+   <Header />
    <Routes>
     <Route path='/user' element={<User/>}/>
     <Route path='/hospitalexpensec' element={<HospitalExpenses/>}/>
@@ -44,7 +54,12 @@ export default function HealthCareAppRoutes() {
     <Route path='/disease' element={<Disease/>}/>
     <Route path='/diseasedocument' element={<DiseaseDocument/>}/>
 
+    <Route path='/' element={<Home/>}/>
+    <Route path='/aboutus/' element={<About/>}/>
+    <Route path='/contactus/' element={<Contact/>}/>
+
 </Routes>
+<Footer />
    </>
   )
 }

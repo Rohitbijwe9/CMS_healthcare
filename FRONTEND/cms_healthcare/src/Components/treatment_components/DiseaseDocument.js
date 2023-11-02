@@ -6,7 +6,7 @@ import axios from 'axios';
 
 export default function ServiceProvider() {
 
-  const{register,handleSubmit}=useForm();
+  const{register,handleSubmit}=useForm(); 
 
   function savedata(data)
   {

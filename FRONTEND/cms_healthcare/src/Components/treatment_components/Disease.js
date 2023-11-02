@@ -7,6 +7,7 @@ import {useForm} from 'react-hook-form'
 import axios from 'axios'
 
 export default function Disease(){
+  
   const{register, handleSubmit}=useForm();
   
   function savedata(data)
@@ -17,6 +18,7 @@ export default function Disease(){
     <>
       <div className='container'>
         <form onSubmit={handleSubmit(savedata)}>
+          
           <label htmlFor='di'>Disease Identifier</label><br/>
           <input type='text' id='di' placeholder='Enter Disease Identifier' className='form-control'/>
 
@@ -43,7 +45,7 @@ export default function Disease(){
 
           <input type='submit' className='btn btn-outline-success' value={'SAVE DATA'}/>
          <input type='reset' className='btn btn-outline-danger' value={'Reset'}/>
-         
+
         </form>
       </div>
     </>

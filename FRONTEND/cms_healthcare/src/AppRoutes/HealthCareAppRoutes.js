@@ -18,6 +18,7 @@ import Patient from '../Components/patient_registration_components/Patient'
 import RoomCategory from '../Components/patient_sheduling_components/RoomCategory'
 import Disease from '../Components/treatment_components/Disease'
 import DiseaseDocument from '../Components/treatment_components/DiseaseDocument'
+import ServiceProvider from '../Components/patient_sheduling_components/ServiceProvider'
 
 export default function HealthCareAppRoutes() {
   return (
@@ -40,7 +41,7 @@ export default function HealthCareAppRoutes() {
     <Route path='/claimdocument' element={<ClaimDocument/>}/>
     <Route path='/patient' element={<Patient/>}/>
     <Route path='/roomcategory' element={<RoomCategory/>}/>
-    <Route path='/serviceprovider' element={<ServiceProviderBill/>}/>
+    <Route path='/serviceprovider' element={<ServiceProvider/>}/>
     <Route path='/disease' element={<Disease/>}/>
     <Route path='/diseasedocument' element={<DiseaseDocument/>}/>
 

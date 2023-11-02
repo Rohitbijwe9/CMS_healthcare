@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function ServiceProviderBill() {
+function ServiceProviderBill() {
   return (
     <div>ServiceProviderBill</div>
   )
 }
+
+export default ServiceProviderBill

@@ -18,10 +18,10 @@ import Patient from '../Components/patient_registration_components/Patient'
 import RoomCategory from '../Components/patient_sheduling_components/RoomCategory'
 import Disease from '../Components/treatment_components/Disease'
 import DiseaseDocument from '../Components/treatment_components/DiseaseDocument'
-import GuestNavbar from '../Components/navbar/GuestNavbar'
 import 'bootstrap/dist/css/bootstrap.min.css'; // Correct import path for Bootstrap CSS
-import About from '../Components/navbar/About'
-import Navbar from '../Components/navbar/Navbar'
+import Header from '../Components/Layout/Header'
+import Footer from '../Components/Layout/Footer'
+import About from '../Components/Layout/About'
 
 
 
@@ -29,7 +29,7 @@ import Navbar from '../Components/navbar/Navbar'
 export default function HealthCareAppRoutes() {
   return (
    <>
-
+  <Header/>
    <Routes>
     <Route path='/aboutus' element={<About/>}/>
     <Route path='/user' element={<User/>}/>
@@ -54,6 +54,7 @@ export default function HealthCareAppRoutes() {
     <Route path='/diseasedocument' element={<DiseaseDocument/>}/>
 
 </Routes>
+<Footer/>
    </>
   )
 }

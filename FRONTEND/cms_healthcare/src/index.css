@@ -5,12 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url(./assets/images/Home.jpg);
-  background-size: 90% 80%; /* Set the width and height to 100% */
-  background-repeat: no-repeat; /* Prevent the image from repeating */
-  background-attachment: fixed; /* Optional: Keep the image fixed within the viewport */
-  background-position: center center; /* Center the background image horizontally and vertically */
-
+ 
 
 
 }

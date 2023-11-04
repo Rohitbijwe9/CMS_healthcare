@@ -32,6 +32,10 @@ class InsurancePayerDetails(models.Model):
     insurance_payer_code=models.CharField(max_length=20)
     address_details=models.OneToOneField('CMS_patient_registration.AddressDetails',on_delete=models.CASCADE,related_name='insurance_payer_name')
 
+    def __str__(self):
+        return f"{self.insurance_payer_name}"
+
+
 
 class Insurance(models.Model):
     insurance_identifier=models.BigAutoField(primary_key=True)

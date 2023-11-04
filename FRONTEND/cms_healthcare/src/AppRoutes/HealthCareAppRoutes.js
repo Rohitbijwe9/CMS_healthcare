@@ -22,6 +22,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Correct import path for Bootst
 import Header from '../Components/Layout/Header'
 import Footer from '../Components/Layout/Footer'
 import About from '../Components/Layout/About'
+import Contact from '../Components/Layout/Contact'
+import Home from '../Components/Layout/Home'
 
 
 
@@ -33,6 +35,8 @@ export default function HealthCareAppRoutes() {
    <Routes>
     <Route path='/aboutus' element={<About/>}/>
     <Route path='/user' element={<User/>}/>
+    <Route path='/contactus' element={<Contact/>}/>
+    <Route path='/' element={<Home/>}/>
     <Route path='/hospitalexpensec' element={<HospitalExpenses/>}/>
     <Route path='/insurencepayerdetails' element={<InsurancePayerDetails/>}/>
     <Route path='/insurence' element={<Insurence/>}/>

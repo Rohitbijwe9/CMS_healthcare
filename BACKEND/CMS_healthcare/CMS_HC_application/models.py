@@ -1,14 +1,20 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from CMS_auth.models import User
 
 
 
 class ContactDetails(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE) ### add to database
     contact_details_id = models.BigAutoField(primary_key=True)
     mobile_number = PhoneNumberField(region='IN')
     alternate_mobile_number = PhoneNumberField(region='IN')
     email_identifier = models.EmailField(blank=True, null=True)
     alternate_email_identifier = models.EmailField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user}"
+
 
 class Appointment(models.Model):
     appointment_identifier=models.BigAutoField(primary_key=True)

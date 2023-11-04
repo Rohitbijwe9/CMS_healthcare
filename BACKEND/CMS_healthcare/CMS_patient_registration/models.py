@@ -11,10 +11,14 @@ class AddressDetails(models.Model):
     addpatients_line2 = models.CharField(max_length=59)
     landmark = models.CharField(max_length=50)
     area = models.CharField(max_length=30)
-    town = models.CharField(max_length=38)
+    town = models.CharField(max_length=40)
     city= models.CharField(max_length=30)
     state = models.CharField(max_length=20)
     pincode = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.city}"
+
 
 
 
@@ -68,6 +72,10 @@ class BankDetails (models.Model):
     bank_name = models.CharField(max_length=50)
     branch_name = models.CharField(max_length=30)
     ifsc_code = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"{self.account_number}"
+
     
 ##########################################################################
 
@@ -103,7 +111,6 @@ class Claim(models.Model):
     patient_age_days = models.PositiveSmallIntegerField()
     patient_isprimary = models.BooleanField(default=False)
     patient_isrider = models.BooleanField(default=False)
-    patient_occupation = models.CharField(max_length=255)
     service_provider_name = models.CharField(max_length=255)
     service_provider_code = models.CharField(max_length=255)
     admitted_reason = models.TextField(max_length=255)
@@ -131,10 +138,15 @@ class Claim(models.Model):
     claim_PDF = models.FileField(upload_to='claim_pdfs/', blank=True)
 
     patients_add_details = models.OneToOneField(AddressDetails, on_delete=models.CASCADE,blank=True)
-    room_category = models.OneToOneField(RoomCategory, on_delete=models.CASCADE, blank=True, related_name='room_category_patient')
+    #room_category = models.OneToOneField(RoomCategory, on_delete=models.CASCADE, blank=True, related_name='room_category_patient')
     contact_details = models.OneToOneField(ContactDetails, on_delete=models.CASCADE, blank=True)
     insurance_payer_details = models.OneToOneField(InsurancePayerDetails, on_delete=models.CASCADE, blank=True)
     bank_details = models.OneToOneField(BankDetails, on_delete=models.CASCADE, blank=True)
+
+
+    def __str__(self):
+        	return f"{self.claim_id}"
+
 
 class ClaimDocument(models.Model):
     claim_document_identifier = models.BigAutoField(primary_key=True)

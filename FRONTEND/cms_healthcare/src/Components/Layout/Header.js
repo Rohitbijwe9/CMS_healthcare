@@ -6,32 +6,26 @@ function Header() {
   return (
     <div>
 
-        <div className="bs-example">
-            <nav className="navbar navbar-expand-md navbar-dark fixed-top" style={{ background: '#020f4a' }}>
-                <div className="container-fluid">
-                    <NavLink className="navbar-brand" to="/">
-                        <img src={logo} alt="not found" height={30} />  
-                    </NavLink>
-
-                    <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div className="navbar-nav">
-                            <NavLink to="/" className="nav-item nav-link">Home</NavLink>
-                            <NavLink to="" className="nav-item nav-link">About Us</NavLink>
-                            <NavLink to="contactus/" className="nav-item nav-link">Contact Us</NavLink>
-                        </div>
-                        <div className="navbar-nav">
-                            <NavLink to="/doctorclick" className="nav-item nav-link">Login</NavLink>
-                        </div>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style={{ background: '#020f4a' }}>
+            <div class="container-fluid">
+                <NavLink className="navbar-brand" to="/">
+                    <img src={logo} alt="not found" height={30} />  
+                </NavLink>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" data-bs-auto-close="true">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                    <div className="navbar-nav">
+                        <NavLink to="/" className="nav-item nav-link">Home</NavLink>
+                        <NavLink to="aboutus/" className="nav-item nav-link">About Us</NavLink>
+                        <NavLink to="contactus/" className="nav-item nav-link">Contact Us</NavLink>
+                    </div>
+                    <div className="navbar-nav">
+                        <NavLink to="/login" className="nav-item nav-link">Login</NavLink>
                     </div>
                 </div>
-            </nav>
-        </div>
-        <br/><br/>
-        <br/><br/>
+            </div>
+        </nav>
     </div>
    
     

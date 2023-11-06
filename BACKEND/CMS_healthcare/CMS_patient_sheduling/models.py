@@ -1,7 +1,9 @@
 from django.db import models
+from CMS_auth.models import User
 from CMS_HC_application.models import ContactDetails
 
 class ServiceProvider(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
     service_provider_identifier = models.BigAutoField(primary_key=True)
     service_provider_name = models.CharField(max_length=50)
     service_provider_code = models.CharField(max_length=20)

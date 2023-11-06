@@ -15,8 +15,31 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/',include('CMS_auth.urls')),
 ]
+
+
+'''
+from rest_framework.routers import DefaultRouter
+from CMS_auth.views import UserRegisterAPI #MyTokenObtainPairView
+from CMS_patient_sheduling.models import ServiceProvider
+from CMS_HC_application.models import ContactDetails
+
+from rest_framework_simplejwt.views import token_obtain_pair, token_refresh
+
+router = DefaultRouter()
+#router.register('posts', ViewSet, basename='posts')
+router.register('user', UserRegisterAPI, basename='user')
+
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
+   # path('access/', MyTokenObtainPairView.as_view()),
+    path('refresh/', token_refresh),
+]
+'''

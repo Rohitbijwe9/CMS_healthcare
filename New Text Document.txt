@@ -1,0 +1,111 @@
+views.py
+
+from rest_framework import viewsets, status,permissions
+from rest_framework.response import Response
+from .models import User
+from .serializers import UserSignupSerializer, LoginSerializer,UserProfileSerializer,ChangePasswordSerializer,PasswordResetSerializer
+from django.core.mail import send_mail
+from django.conf import settings
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth import authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
+
+class UserAdmin(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSignupSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        
+        # Send registration email
+        subject = 'Registration Confirmation'
+        message = f'Your username: {serializer.validated_data["username"]}, Your password: {serializer.validated_data["password"]}'
+        from_email = settings.EMAIL_HOST_USER
+        recipient_list = [serializer.validated_data["email"]]
+        
+        send_mail(subject, message, from_email, recipient_list)
+        
+        return Response(serializer.data)
+
+
+
+class LoginViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = LoginSerializer
+
+    def create(self, request, *args, **kwargs):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        email=request.data.get('email')
+
+        user = authenticate(request, username=username, password=password,email=email)
+
+        if user is not None:
+            User(request, user)  # Log the user in
+
+            # Generate JWT token
+            refresh = RefreshToken.for_user(user)
+            data = {
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            }
+
+            # Create a login record (if needed)
+            User.objects.create(user=user)
+
+            return Response(data, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_update(self, serializer):
+        # Ensure that staff members can only update their own profile
+        if self.request.user.is_staff and self.request.user == serializer.instance.user:
+            serializer.save()
+        else:
+            raise PermissionError("You do not have permission to update this profile.")
+        
+        
+#4
+class ChangePasswordViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+
+    def create(self, request):
+        serializer = ChangePasswordSerializer(data=request.data)
+        if serializer.is_valid():
+            user = request.user
+            if user.check_password(serializer.validated_data['old_password']):
+                user.set_password(serializer.validated_data['new_password'])
+                user.save()
+                return Response({'message': 'Password changed successfully'}, status=status.HTTP_200_OK)
+            else:
+                return Response({'message': 'Invalid old password'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+from rest_framework.views import APIView
+
+class PasswordResetViewSet(viewsets.ModelViewSet):
+    def post(self, request):
+        serializer = PasswordResetSerializer(data=request.data)
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            # You can implement logic here to send a password reset email to the user
+            # Include a unique token in the email to verify the user's identity
+            # For simplicity, we'll just return a success message for this example.
+            return Response({'message': 'Password reset email sent successfully'}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+#5
+
+#class StaffMemberViewSet(viewsets.ModelViewSet):
+ #   queryset = StaffMember.objects.all()
+  #  serializer_class = StaffMemberSerializer
+   # permission_classes = [IsAdminUserOrReadOnly]

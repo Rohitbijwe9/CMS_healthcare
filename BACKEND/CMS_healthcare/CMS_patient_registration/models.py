@@ -62,7 +62,7 @@ class Patient(models.Model):
     
 
 class BankDetails (models.Model):
-    bank_details_identifier = models. BigAutoField(primary_key=True)
+    bank_details_identifier = models.BigAutoField(primary_key=True)
     pancard_number = models.CharField(max_length=10)
     account_number = models.CharField(max_length=20)
     bank_name = models.CharField(max_length=50)
@@ -130,7 +130,7 @@ class Claim(models.Model):
     claim_PDF = models.FileField(upload_to='claim_pdfs/', blank=True)
 
     patients_add_details = models.OneToOneField(AddressDetails, on_delete=models.CASCADE,blank=True)
-    room_category = models.OneToOneField(RoomCategory, on_delete=models.CASCADE, blank=True, related_name='room_category_patient')
+    # room_category = models.OneToOneField(RoomCategory, on_delete=models.CASCADE, blank=True, related_name='room_category_patient')
     contact_details = models.OneToOneField(ContactDetails, on_delete=models.CASCADE, blank=True)
     insurance_payer_details = models.OneToOneField(InsurancePayerDetails, on_delete=models.CASCADE, blank=True)
     bank_details = models.OneToOneField(BankDetails, on_delete=models.CASCADE, blank=True)

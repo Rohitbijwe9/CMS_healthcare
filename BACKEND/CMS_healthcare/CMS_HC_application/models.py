@@ -1,9 +1,11 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from CMS_auth.models import User
 
 
 
 class ContactDetails(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)       #add to db
     contact_details_id = models.BigAutoField(primary_key=True)
     mobile_number = PhoneNumberField(region='IN')
     alternate_mobile_number = PhoneNumberField(region='IN')

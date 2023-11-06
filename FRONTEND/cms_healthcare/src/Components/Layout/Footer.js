@@ -23,10 +23,11 @@ function Footer() {
                 </div>
 
                 <div className="ms-2 d-flex align-items-center flex-column text-center">
-                    <span className=''>Privacy Policy</span>
-                    <span>Help</span>
                     <span>Developers</span>
-                    <span>Terms of use</span>
+                    <span>Help</span>
+                    <span>License</span>
+                    <span>Privacy Policy</span>
+                    <span>Terms & Conditions</span>
                     
                     <span className='m-4'>
                         <NavLink><i class="bi bi-facebook m-2"></i></NavLink>

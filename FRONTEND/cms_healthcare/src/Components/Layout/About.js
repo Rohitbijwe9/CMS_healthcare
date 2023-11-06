@@ -20,24 +20,24 @@ function About() {
       
       {/* 0000000000 */}
 
-      <div class="row gx-5">
-        <div class="col">
-          <div class="p-3 bg-light">
-          <i class="abouticon bi bi-person-badge"></i>
+      <div className="row gx-5">
+        <div className="col">
+          <div className="p-3 bg-light">
+          <i className="abouticon bi bi-person-badge"></i>
             <h1>Connect</h1>
             <span className='small'>We understand healthcare goes beyond signs, symptoms, diagnosis, and treatment. It’s about the deep connection between doctors and patients that leads to continuous care and sustained, better outcomes.</span>
           </div>
         </div>
-        <div class="col">
-          <div class="p-3 bg-light">
-            <i class="abouticon bi bi-shield-check"></i>
+        <div className="col">
+          <div className="p-3 bg-light">
+            <i className="abouticon bi bi-shield-check"></i>
             <h1>Trust</h1>
             <span className='small'>Practo works on trust. We are aware of the responsibility placed on us by 30 crore+ patients and over a lakh doctors. We always have and always will do everything we possibly can to uphold this trust.</span>
           </div>
         </div>
-        <div class="col">
-          <div class="p-3 bg-light">
-            <i class="abouticon bi bi-eye"></i>
+        <div className="col">
+          <div className="p-3 bg-light">
+            <i className="abouticon bi bi-eye"></i>
             <h1>Transparency</h1>
             <span className='small'>We believe in full disclosure. We believe in communicating openly and honestly, and holding ourselves to the highest ethical standards.</span>
           </div>

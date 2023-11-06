@@ -7,7 +7,8 @@ from .models import Appointment,ContactDetails
 class AppointmentModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
-        fields = ['appointment_date','appointment_time','reason_of_appointment','appointment_for','contact_details']
+        fields = ['appointment_identifier','appointment_date','appointment_time','reason_of_appointment','appointment_for','contact_details']
+        #fields='__all__'
 
 
 class ContactDetailsModelSerializer(serializers.ModelSerializer):

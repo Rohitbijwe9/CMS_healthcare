@@ -8,6 +8,6 @@ class ContactDetailsAdmin(admin.ModelAdmin):
 
 @admin.register(Appointment)
 class Appointment(admin.ModelAdmin):
-    list_display=['appointment_identifier','appointment_date','appointment_time','reason_of_appointment','appointment_for','contact_details']
+    list_display=['appointment_identifier','appointment_date','appointment_time','reason_of_appointment','appointment_for','contact_details','a_status']
     
 

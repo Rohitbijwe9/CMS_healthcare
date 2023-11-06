@@ -24,6 +24,9 @@ import Footer from '../Components/Layout/Footer'
 import About from '../Components/Layout/About'
 import Contact from '../Components/Layout/Contact'
 import Home from '../Components/Layout/Home'
+import Login from '../Components/signuplogin/Login'
+import Signup from '../Components/signuplogin/Signup'
+import Appointmentstatus from '../Components/hc_application_components/Appointmentstatus'
 
 
 
@@ -56,6 +59,12 @@ export default function HealthCareAppRoutes() {
     <Route path='/serviceprovider' element={<ServiceProviderBill/>}/>
     <Route path='/disease' element={<Disease/>}/>
     <Route path='/diseasedocument' element={<DiseaseDocument/>}/>
+
+    <Route path='/login' element={<Login/>}/>
+    <Route path='/signup' element={<Signup/>}/>
+    <Route path='/astatus' element={<Appointmentstatus/>}/>
+
+
 
 </Routes>
 <Footer/>

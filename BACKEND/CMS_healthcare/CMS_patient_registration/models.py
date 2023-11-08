@@ -16,6 +16,9 @@ class AddressDetails(models.Model):
     state = models.CharField(max_length=20)
     pincode = models.IntegerField()
 
+    def __str__(self):
+        return f"{self.city}"
+
 
 
 class Patient(models.Model):
@@ -69,9 +72,13 @@ class BankDetails (models.Model):
     branch_name = models.CharField(max_length=30)
     ifsc_code = models.CharField(max_length=20)
 
+    def __str__(self):
+        return f"{self.account_number}"
+
+
+
 
 class Claim(models.Model):
-
     GENDER = [
 	('male', 'male'),
 	('female','female'),
@@ -134,6 +141,13 @@ class Claim(models.Model):
     contact_details = models.OneToOneField(ContactDetails, on_delete=models.CASCADE, blank=True)
     insurance_payer_details = models.OneToOneField(InsurancePayerDetails, on_delete=models.CASCADE, blank=True)
     bank_details = models.OneToOneField(BankDetails, on_delete=models.CASCADE, blank=True)
+
+    def __str__(self):
+        	return f"{self.claim_id}"
+    
+
+
+    
 
 class ClaimDocument(models.Model):
     claim_document_identifier = models.BigAutoField(primary_key=True)

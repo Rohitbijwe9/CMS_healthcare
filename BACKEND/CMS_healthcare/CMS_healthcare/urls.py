@@ -22,7 +22,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('billing/', include('CMS_billing.urls'))
+    path('billing/', include('CMS_billing.urls')),
+    path('patientreg/',include('CMS_patient_registration.urls')),
+    path('hcapp/',include('CMS_HC_application.urls'))
 ]
 
 

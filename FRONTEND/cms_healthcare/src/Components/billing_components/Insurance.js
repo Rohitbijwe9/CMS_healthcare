@@ -22,14 +22,14 @@ function Insurance() {
                     <div className="row mb-3 mt-3">
                       <label for="inputEmail3" className="col-sm-7 col-form-label">Insurance start date : </label>
                       <div className="col-sm-5">
-                        <input type="date" className="form-control" id="inputEmail3" {...register('insurance_start_date')}/>
+                        <input type="date" className="form-control shadow-none rounded-0" id="inputEmail3" {...register('insurance_start_date')}/>
                       </div>
                     </div>
 
                     <div className="row mb-3 mt-3">
                       <label for="inputEmail3" className="col-sm-7 col-form-label">Insurance end date : </label>
                       <div className="col-sm-5">
-                        <input type="date" className="form-control" id="inputEmail3" {...register('insurance_end_date')} />
+                        <input type="date" className="form-control shadow-none rounded-0" id="inputEmail3" {...register('insurance_end_date')} />
                       </div>
                     </div>
 

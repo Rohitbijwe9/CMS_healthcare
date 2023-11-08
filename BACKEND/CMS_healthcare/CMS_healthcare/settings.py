@@ -131,13 +131,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_URL='/imade/download/'
+MEDIA_URL='/image/download/'
 MEDIA_ROOT= BASE_DIR
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "mishr.dh43@gmail.com"
+EMAIL_HOST_PASSWORD = "mlmnyuhfzxzqgoiy"
 
 
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from "react-router-dom";
 import Slide1 from '../../Static/Images/slide1.jpg'
 import Slide2 from '../../Static/Images/slide2.jpg'
 import Slide3 from '../../Static/Images/slide3.jpg'
@@ -38,9 +39,16 @@ function Home() {
 
         <div className="appointment text-center m-5">
             <h3 className='mb-4'>Emergency?</h3>
-            <button className='btn btn-lg rounded-0 border-0 btn-primary p-3' style={{backgroundColor : "#121831"}}>
-                Book an Appointment
-            </button>
+            <NavLink to={"/contactdetails/"}>
+                <button className='btn btn-lg rounded-0 border-0 btn-primary p-3 m-3' style={{backgroundColor : "#121831"}}>
+                    Book an Appointment
+                </button>
+            </NavLink>
+            <NavLink to={"/astatus"}>
+                <button className='btn btn-lg rounded-0 border-0 btn-primary p-3' style={{backgroundColor : "#121831"}}>
+                    Check Appointment Status
+                </button>
+            </NavLink>
         </div>
     </div>
     </>

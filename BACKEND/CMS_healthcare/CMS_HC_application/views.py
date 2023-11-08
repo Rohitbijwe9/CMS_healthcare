@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from .models import Appointment, ContactDetails
-from .serializers import AppointmentModelSerializer, ContactDetailsModelSerializer
+from .serializers import AppointmentModelSerializer, ContactDetailsModelSerializer , IsApprovedAppointment
 
 class ContactAPIView(APIView):
     def get(self, request):
@@ -58,3 +58,67 @@ class CheckAppointmentStatus(APIView):
         except Appointment.DoesNotExist:
             return Response({"error": "Appointment not found"}, status=status.HTTP_404_NOT_FOUND)
 
+
+
+### for checking approved appointent
+
+
+
+class CheckApproveAppointment(APIView):
+   
+    permission_classes = [IsApprovedAppointment]
+
+    def get(self, request):
+        try:
+            # Filter for approved appointments
+            approved_appointments = Appointment.objects.filter(a_status='approved')
+            
+            # Serialize the approved appointments
+            serializer = AppointmentModelSerializer(approved_appointments, many=True)
+            
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Appointment.DoesNotExist:
+            return Response({"error": "No approved appointments found"}, status=status.HTTP_404_NOT_FOUND)
+        
+    
+
+class CheckPendingAppointment(APIView):
+   
+    permission_classes = [IsApprovedAppointment]
+
+    def get(self, request):
+        try:
+            # Filter for approved appointments
+            pending_appointments = Appointment.objects.filter(a_status='pending')
+            
+            # Serialize the approved appointments
+            serializer = AppointmentModelSerializer(pending_appointments, many=True)
+            
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Appointment.DoesNotExist:
+            return Response({"error": "No pending appointments found"}, status=status.HTTP_404_NOT_FOUND)
+        
+    
+#######
+
+
+
+
+
+class ApproveAppointmentView(APIView):
+    def get(self, request, appointment_identifier):
+        try:
+            appointment = Appointment.objects.get(appointment_identifier=appointment_identifier)
+        except Appointment.DoesNotExist:
+            return Response({"error": "Appointment not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        if appointment.a_status == "pending":
+            print(appointment.a_status)
+            appointment.a_status = "approved"
+            print(appointment.a_status)
+
+            appointment.save()
+            print(appointment.a_status)
+            return Response({"message": "Appointment approved successfully"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "Appointment is not in pending status"}, status=status.HTTP_400_BAD_REQUEST)

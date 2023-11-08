@@ -27,6 +27,18 @@ import Home from '../Components/Layout/Home'
 import Login from '../Components/signuplogin/Login'
 import Signup from '../Components/signuplogin/Signup'
 import Appointmentstatus from '../Components/hc_application_components/Appointmentstatus'
+import Show from '../Components/patient_registration_components/Showpatient'
+import Showperticular from '../Components/patient_registration_components/Showperticular'
+import Deletepatient from '../Components/patient_registration_components/Deletepatient'
+import PatientUpdate from '../Components/patient_registration_components/Updatepatient'
+import Showapproveappintment from '../Components/hc_application_components/Showapproveappointment'
+import Showpendingappointment from '../Components/hc_application_components/Showpendingappointment'
+import Approveappointment from '../Components/hc_application_components/Approveappointment'
+import { ApproveAppointment } from '../Components/hc_application_components/Approveappointment';
+
+
+
+
 
 
 
@@ -62,7 +74,21 @@ export default function HealthCareAppRoutes() {
 
     <Route path='/login' element={<Login/>}/>
     <Route path='/signup' element={<Signup/>}/>
+
     <Route path='/astatus' element={<Appointmentstatus/>}/>
+    <Route path='/showapprove'element={<Showapproveappintment/>}/>
+    <Route path='/showpending' element={<Showpendingappointment/>}/>
+    <Route path='/approveappointment/:pk' element={<ApproveAppointment/>}/>
+
+
+
+    <Route path='/showpatient' element={<Show/>}/>
+    <Route path='/showper' element={<Showperticular/>}/>
+    <Route path='/deletepatient/:pk' element={<Deletepatient/>}/>
+    <Route path='/updatepatient/:pk/' element={<PatientUpdate/>}/>
+
+
+
 
 
 

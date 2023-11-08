@@ -16,7 +16,7 @@ function Home() {
       // Calculate the index of the next slide
       const nextSlide = (activeSlide + 1) % slideImages.length;
       setActiveSlide(nextSlide);
-    }, 20000); // 2 seconds in milliseconds
+    }, 2000); // 2 seconds in milliseconds
 
     return () => {
       // Cleanup the timer when the component unmounts

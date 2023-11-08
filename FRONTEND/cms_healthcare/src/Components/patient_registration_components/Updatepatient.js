@@ -1,38 +1,46 @@
-import React from 'react'
-import {useForm} from 'react-hook-form'
 import axios from 'axios';
+import React, { useEffect } from 'react'
+import { useForm } from 'react-hook-form';
+import { useNavigate, useParams } from 'react-router-dom'
+
+export default function PatientUpdate() {
+
+    const{pk}=useParams();
+
+    const redirect=useNavigate();
+
+    const{register,handleSubmit,setValue}=useForm({});
+
+   async function fetchuser()
+    {
+        const result=await axios.get(`http://127.0.0.1:8000/patientreg/patient/${pk}/`)
+        setValue('eid',result.data.eid)
+        setValue('ename',result.data.ename)
+        setValue('phone',result.data.phone)
+        setValue('mail',result.data.mail)
+        setValue('add',result.data.add)
+        setValue('photo',result.data.photo)
 
 
+    }
 
-export default function Patient() {
+    function savedata(data)
+    {
+        data.photo= data.photo[0]
+        axios.put(`http://127.0.0.1:8000/patientreg/patient/${pk}/`,data,{headers:{'Content-Type':'multipart/form-data'}})
+        redirect('/show')
 
-  const{register,handleSubmit}=useForm();
 
-  async function savedata(data)
-  {
+    }
 
-    
-    data.patient_image = data.patient_image[0]
-    data.patient_aadhar_card_image = data.patient_aadhar_card_image[0]
+    useEffect(()=>{fetchuser()},[])
 
-    const resp = await axios.post('http://127.0.0.1:8000/patientreg/patient/',data,{headers:{'Content-Type':'multipart/form-data'}})
-    console.log(resp.data)
-  }
+
 
   return (
    <>
-
-  <div className='container'>
-  <br/><br/><br/>
-    <form encType='multipart/form-data' onSubmit={handleSubmit(savedata)}>
-     
-
-      
-      
-      
-
-
-      <label htmlFor='pcode'>Patient Code</label><br/>
+    <form onSubmit={handleSubmit(savedata)} encType='multipart/form-data' className='container'>
+    <label htmlFor='pcode'>Patient Code</label><br/>
       <input type='number' id='pcode' placeholder='enter patient code' className='form-control'
       {...register('patient_code')}/><br/>
 
@@ -119,7 +127,7 @@ export default function Patient() {
       <input type='text' id='padd' placeholder='enter patientaddress' className='form-control'{...register('patients_add_details')}/><br/>
 
       <label htmlFor='con'>Contact </label><br/>
-      <input type='text' id='con' placeholder='enter contact' className='form-control'{...register('contact_details')}/><br/>
+      <input type='number' id='con' placeholder='enter contact' className='form-control'{...register('contact_details')}/><br/>
 
       
 
@@ -129,10 +137,8 @@ export default function Patient() {
 
 
 
-</form>
-  </div>
-
-
+        
+    </form>    
 
    </>
   )

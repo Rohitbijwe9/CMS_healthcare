@@ -19,7 +19,7 @@ class ContactDetails(models.Model):
 
     
 
-astatus=[('pendind','pending'),('approved','approved'),('rejected','rejected')]
+astatus=[('pending','pending'),('approved','approved'),('rejected','rejected')]
 class Appointment(models.Model):
     appointment_identifier=models.BigAutoField(primary_key=True)
     appointment_date=models.DateField()

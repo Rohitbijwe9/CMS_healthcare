@@ -1,4 +1,4 @@
-from .models import BankDetails,Claim,ClaimDocument
+from .models import BankDetails,Claim,ClaimDocument,Patient
 from rest_framework import serializers
 
 
@@ -8,6 +8,8 @@ class BankDetailsModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = BankDetails
         fields = '__all__'
+
+
 
 
 #Claim Model
@@ -34,6 +36,15 @@ class ClaimDocumentModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClaimDocument 
         fields='__all__'
+
+
+#
+
+
+class PatientModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Patient
+        fields = '__all__'
 
 
 

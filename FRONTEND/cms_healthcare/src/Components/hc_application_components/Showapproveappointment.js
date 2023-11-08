@@ -60,11 +60,11 @@ export default function Showapproveappintment() {
 
 
 
-                           <NavLink to={`/deletepatient/${obj.personal_identifier}/`}><button className='btn btn-danger'><FontAwesomeIcon icon={faTrash} /> 
+                           <NavLink to={`/deleteappointment/${obj.appointment_identifier}/`}><button className='btn btn-danger'><FontAwesomeIcon icon={faTrash} /> 
                            </button></NavLink>
                            </tr>
 
-                           
+                          
 
 
 

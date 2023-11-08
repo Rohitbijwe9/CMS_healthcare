@@ -35,6 +35,7 @@ import Showapproveappintment from '../Components/hc_application_components/Showa
 import Showpendingappointment from '../Components/hc_application_components/Showpendingappointment'
 import Approveappointment from '../Components/hc_application_components/Approveappointment'
 import { ApproveAppointment } from '../Components/hc_application_components/Approveappointment';
+import Deletappointment from '../Components/hc_application_components/Deleteappointment'
 
 
 
@@ -79,6 +80,7 @@ export default function HealthCareAppRoutes() {
     <Route path='/showapprove'element={<Showapproveappintment/>}/>
     <Route path='/showpending' element={<Showpendingappointment/>}/>
     <Route path='/approveappointment/:pk' element={<ApproveAppointment/>}/>
+    <Route path='/deleteappointment/:pk' element={<Deletappointment/>}/>
 
 
 

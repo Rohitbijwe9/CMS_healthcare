@@ -65,7 +65,7 @@ export default function Showpendingappointment() {
 
 
                             <td>
-                           <NavLink to={`/deletepatient/${obj.appointment_identifier}/`}><button className='btn btn-danger'><FontAwesomeIcon icon={faTrash} /> 
+                            <NavLink to={`/deleteappointment/${obj.appointment_identifier}/`}><button className='btn btn-danger'><FontAwesomeIcon icon={faTrash} /> 
                            </button></NavLink>
                            </td>
 

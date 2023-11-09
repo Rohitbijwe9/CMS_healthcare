@@ -13,7 +13,7 @@ export default function Appointment() {
     
       await axios.post('http://127.0.0.1:8000/hcapp/Appointmentview/', data);
 
-        redirect('/');
+        redirect('/admin/showpending');
     
   
   }
@@ -47,7 +47,7 @@ export default function Appointment() {
               <input
                 className="form-control shadow-none rounded-0 mt-3"
                 type="text"
-                placeholder="Contact Details"
+                placeholder="Contact Reference"
                 {...register('contact_details')}
               />
 
@@ -64,7 +64,7 @@ export default function Appointment() {
                 className="rounded-0 border-0 btn btn-primary mt-3 mb-5 col-12"
                 style={{ backgroundColor: "#121831" }}
               >
-                BOOK
+                Book Appointment
               </button>
             </div>
           </div>

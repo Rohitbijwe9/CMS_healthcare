@@ -7,10 +7,10 @@ function Footer() {
   return (
     <div>
         <footer className="footer text-light " style={{ background: '#121831' }}>
-            <div className="container pt-5 pb-5 d-flex copyright">
+            <div className="container pt-5 pb-5 d-flex flex-wrap copyright">
                 
-                <div className='me-2 text-center'>
-                    {/* <span className='px-5'>Our Facilities </span>  */}
+                <div className='me-2 text-center mb-5'>
+                    <span className='px-3'>Our Site </span> 
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d484247.9912592107!2d73.8567437!3d18.520430300000008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1698233687311!5m2!1sen!2sin"
                         width="100%"
@@ -20,11 +20,11 @@ function Footer() {
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
                         title="Google Map"
-                        // className='mt-2'
+                        className='mt-2'
                     />
                 </div>
 
-                <div className="ms-2 d-flex align-items-center flex-column text-center">
+                <div className=" ms-2 d-flex flex-wrap align-items-center flex-column text-center">
                     <span>Meet Our Doctors</span>
                     <span>Developers</span>
                     <span>Help</span>

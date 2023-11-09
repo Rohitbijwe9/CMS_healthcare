@@ -12,7 +12,7 @@ function ApproveAppointment() {
       try {
         await axios.get(`http://127.0.0.1:8000/hcapp/approveappointment/${pk}/`);
         setIsLoading(false);
-        redirect('/showpending');
+        redirect('/admin/showpending');
       } catch (error) {
         console.error('Error while approving appointment:', error);
         setIsLoading(false); // Stop loading even if there's an error

@@ -58,15 +58,14 @@ export default function Showpendingappointment() {
   
 
                             <td>
-                            <NavLink to={`/deleteappointment/${obj.appointment_identifier}/`}>
-                                <button className='btn btn-danger'><i class="bi bi-archive-fill"></i> 
-                                </button>
+                            <NavLink to={`/admin/deleteappointment/${obj.appointment_identifier}/`}>
+                                <i class="bi bi-archive-fill text-danger"></i>
                            </NavLink>
                            </td>
 
                            <td>
-                            <NavLink to={`/approveappointment/${obj.appointment_identifier}`}>
-                                <i class="bi bi-check-circle-fill"></i>
+                            <NavLink to={`/admin/approveappointment/${obj.appointment_identifier}`}>
+                                <i class="bi bi-check-circle-fill text-success"></i>
                             </NavLink>
                            </td>
                         

@@ -42,6 +42,8 @@ import DeleteAppointment from '../Components/Admin/DeleteAppointment'
 import Showapproveappointment from '../Components/Admin/Showapproveappointment'
 import Showpendingappointment from '../Components/Admin/Showpendingappointment'
 import TransactionDetails from '../Components/billing_components/TransactionDetails'
+import AddMorePatientDetails from '../Components/Admin/AddMorePatientDetails'
+import PatientBilling from '../Components/Admin/PatientBilling'
 
 
 
@@ -99,6 +101,9 @@ export default function HealthCareAppRoutes() {
     <Route path='/admin/showper' element={<ShowParticular/>}/>
     <Route path='/admin/updatepatient' element={<UpdatePatient/>}/>
     <Route path='/admin/deletepatient' element={<DeletePatient/>}/>
+    <Route path='/admin/addmore' element={<AddMorePatientDetails/>}/>
+    <Route path='/admin/patientbilling' element={<PatientBilling/>}/>
+
 
 </Routes>
     

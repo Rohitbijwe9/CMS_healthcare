@@ -28,4 +28,9 @@ class Appointment(models.Model):
     appointment_for=models.CharField(max_length=70)
     contact_details=models.OneToOneField(ContactDetails,on_delete=models.CASCADE,related_name='appointment_contact_details')
     a_status=models.CharField(max_length=50,choices=astatus,default='pending')
+
+
+
+
+
     

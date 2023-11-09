@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function AddressDetails() {
   return (
-    <div>AddressDetails</div>
+    <div className='mt-5 pt-5'>AddressDetails component</div>
   )
 }

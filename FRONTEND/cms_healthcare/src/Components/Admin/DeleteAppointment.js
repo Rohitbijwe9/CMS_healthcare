@@ -24,7 +24,7 @@ export default function DeleteAppointment() {
        
 
         axios.delete(`http://127.0.0.1:8000/hcapp/deleteappointment/${pk}/`)
-        redirect ('/showapprove')
+        redirect ('/admin/showpending')
     }
 
     useEffect(()=>{fetchuser()},[])
@@ -43,7 +43,7 @@ export default function DeleteAppointment() {
             {/* <h1>Please confirm </h1> */}
             <h4 className='mb-3'>Do you really want to delete this data?</h4>
             <button className='btn btn-danger rounded-0 me-2' onClick={()=>(deleconf())}>YES</button>
-            <NavLink to={'/showpatient/'}><button className='btn btn-success rounded-0'>NO</button></NavLink>
+            <NavLink to={'/admin/showpending'}><button className='btn btn-success rounded-0'>NO</button></NavLink>
         </div>
 
         <br/><br/><br/><br/><br/><br/><br/>

@@ -6,7 +6,7 @@ from CMS_patient_sheduling.models import RoomCategory
 
 
 class AddressDetails(models.Model):                
-    addpatients_details_id = models. BigAutoField(primary_key=True)
+    addpatients_details_id = models.BigAutoField(primary_key=True)
     addpatients_linel = models.CharField(max_length=50)
     addpatients_line2 = models.CharField(max_length=59)
     landmark = models.CharField(max_length=50)

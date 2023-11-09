@@ -57,12 +57,9 @@ export default function Showapproveappointment() {
 
                         <td>
                             <tr>
-
-                           <NavLink to={`/deleteappointment/${obj.appointment_identifier}/`}>
-                                <button className='btn'>
-                                    <i class="bi bi-archive-fill"></i> 
-                                </button>
-                           </NavLink>
+                                <NavLink to={`/admin/deleteappointment/${obj.appointment_identifier}/`}>
+                                    <i class="bi bi-archive-fill"></i>
+                                </NavLink>
                            </tr>
                         </td>
                     </tr>

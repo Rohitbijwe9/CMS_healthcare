@@ -56,6 +56,9 @@ export default function Showpatient() {
 
                            <NavLink to={`/deletepatient/${obj.personal_identifier}/`}><button className='btn'><i className="appointmenticon bi bi-archive-fill"></i>
                            </button></NavLink>
+                           
+                           <NavLink to={`/admin/addmore/${obj.personal_identifier}/`}>
+                            <button className='btn'>Add more details</button></NavLink>
                            </tr>
 
                            

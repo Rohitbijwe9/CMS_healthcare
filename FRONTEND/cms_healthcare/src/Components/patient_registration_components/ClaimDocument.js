@@ -17,7 +17,7 @@ export default function ClaimDocument() {
    <>
 
   <div className='container'>
-    <form onSubmit={handleSubmit(savedata)}>
+    <form onSubmit={handleSubmit(savedata)}><br/><br/><br/>
 
     <label htmlFor='cn'>Claim Name</label><br/>
     <input type='text' id='cn' placeholder='enter claim name' className='form-control'
@@ -31,7 +31,7 @@ export default function ClaimDocument() {
     <input type='text' id='cl'  className='form-control'
     {...register('claim')}/><br/>
 
-    <input type='submit' className='btn btn-outline-success' value={'SAVE DATA'}/>
+    <input type='submit' className='btn btn-outline-success' value={'SAVE DATA'}/><br/><br/><br/>
 
 
 

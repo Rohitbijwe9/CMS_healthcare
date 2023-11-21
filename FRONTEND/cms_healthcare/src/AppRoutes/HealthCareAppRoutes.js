@@ -36,6 +36,14 @@ import Showpendingappointment from '../Components/hc_application_components/Show
 import Approveappointment from '../Components/hc_application_components/Approveappointment'
 import { ApproveAppointment } from '../Components/hc_application_components/Approveappointment';
 import Deletappointment from '../Components/hc_application_components/Deleteappointment'
+import Sidebar from '../Components/Admin/Sidebar'
+import AdminDashboard from '../Components/Admin/AdminDashbord'
+import PatientAdmin from '../Components/Admin/PatientAdmin'
+import DoctorAdmin from '../Components/Admin/DoctorAdmin'
+import RegisterDoctor from '../Components/Admin/RegisterDoctor'
+import AppointmentAdmin from '../Components/Admin/AppointmentAdmin'
+import PatientRegistration from '../Components/Admin/PatientRegistration'
+import Billing from '../Components/Admin/Billing'
 
 
 
@@ -53,6 +61,8 @@ export default function HealthCareAppRoutes() {
     <Route path='/user' element={<User/>}/>
     <Route path='/contactus' element={<Contact/>}/>
     <Route path='/' element={<Home/>}/>
+
+
     <Route path='/hospitalexpensec' element={<HospitalExpenses/>}/>
     <Route path='/insurencepayerdetails' element={<InsurancePayerDetails/>}/>
     <Route path='/insurence' element={<Insurence/>}/>
@@ -61,6 +71,8 @@ export default function HealthCareAppRoutes() {
     <Route path='/paymentinfo' element={<PaymentInfo/>}/>
     <Route path='/serviceproviderbill' element={<ServiceProviderBill/>}/>
     <Route path='/TrasactionDetails' element={<ServiceProviderBill/>}/>
+
+    
     <Route path='/appointment' element={<Appointment/>}/>
     <Route path='/contactdetails' element={<ContactDetails/>}/>
     <Route path='/addressdetails' element={<AddressDetails/>}/>
@@ -85,9 +97,30 @@ export default function HealthCareAppRoutes() {
 
 
     <Route path='/showpatient' element={<Show/>}/>
-    <Route path='/showper' element={<Showperticular/>}/>
+    <Route path='/showper/:pk/' element={<Showperticular/>}/>
     <Route path='/deletepatient/:pk' element={<Deletepatient/>}/>
     <Route path='/updatepatient/:pk/' element={<PatientUpdate/>}/>
+
+
+    <Route path='/admin/sidebar' element={<Sidebar/>}/>
+    <Route path='/admin/admindash' element={<AdminDashboard/>}/>
+    <Route path='/admin/patients' element={<PatientAdmin/>}/>
+    <Route path='/admin/doctors' element={<DoctorAdmin/>}/>
+    <Route path='/admin/registerdoctor' element={<RegisterDoctor/>}/>
+    <Route path='/admin/appointments' element={<AppointmentAdmin/>}/>
+    <Route path='admin/patientreg' element={<PatientRegistration/>}/>
+    <Route path='admin/billing' element={<Billing/>}/>
+
+
+
+
+
+    
+
+
+
+
+
 
 
 

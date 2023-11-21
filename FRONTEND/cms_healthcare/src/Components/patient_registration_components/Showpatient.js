@@ -1,16 +1,17 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { NavLink } from 'react-router-dom';
+// import {  useNavigate } from 'react-router-dom';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-import { faEdit, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
+// import { faEdit, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
 
 
-export default function Show() {
+export default function Showpatient() {
     const[user,setuser]=useState([]);
 
-    const redirect=useNavigate()
+    // const redirect=useNavigate()
 
     async function fetchdata()
     {
@@ -22,10 +23,10 @@ export default function Show() {
     useEffect(()=>{fetchdata()},[])
   return (
     <>
-        <div className="Login container-fluid form-container">
+        <div className="Login container form-container">
 
             <br/><br/><br/>
-    <table className='table table-stipped'>
+    <table className='table table-primary text-center' >
         <thead>
             <tr>
                 <th>Patient Image</th>
@@ -40,21 +41,23 @@ export default function Show() {
             {
                 user.map(obj=>{return(
                     <tr>
-                        <td><img src={`http://localhost:8000${obj.patient_image}`} width="100px" height="100px"/></td>
+                        <td><img src={`http://localhost:8000${obj.patient_image}`} width="100px" height="100px" alt='patient'/></td>
                         <td>{obj.patient_code}</td>
                         <td>{obj.patient_first_name}</td>
                         <td>{obj.patient_last_name}</td>
                         <td>{obj.contact_details}</td>
                         <td>
                             <tr>
-                            <NavLink to={'/showper'}><button><FontAwesomeIcon icon={faEye} /></button></NavLink>
+                            <NavLink to={`/showper/${obj.personal_identifier}`}><button className='btn'><i className="appointmenticon bi bi-eye-fill"></i></button></NavLink>
 
 
-                           <NavLink to={`/updatepatient/${obj.personal_identifier}/`}> <button className='btn btn-warning'><FontAwesomeIcon icon={faEdit} /> 
+                           <NavLink to={`/updatepatient/${obj.personal_identifier}/`}> <button className='btn'><i className="appointmenticon bi bi-pen-fill"></i> 
                            </button></NavLink>
 
-                           <NavLink to={`/deletepatient/${obj.personal_identifier}/`}><button className='btn btn-danger'><FontAwesomeIcon icon={faTrash} /> 
+                           <NavLink to={`/deletepatient/${obj.personal_identifier}/`}><button className='btn'><i className="appointmenticon bi bi-archive-fill"></i>
                            </button></NavLink>
+                           
+                           
                            </tr>
 
                            

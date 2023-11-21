@@ -45,7 +45,7 @@ export default function BankDetails() {
 
   return (
     <div className='container'>
-      <form onSubmit={handleSubmit(savedata)}><br/><br/>
+      <form onSubmit={handleSubmit(savedata)}><br/><br/><br/>
 
 
         <label htmlFor='pn'>Pan Card Number</label><br />
@@ -91,7 +91,7 @@ export default function BankDetails() {
 
         <label htmlFor='brn'>Branch Name</label><br />
         <input type='text'id='brn'placeholder='enter branch name'className='form-control'
-          {...register('branch_name')}/><br />
+          {...register('branch_name')}/><br /><br/><br/>
 
         <input type='submit' className='btn btn-outline-success' value={'SAVE DATA'} />
       </form>

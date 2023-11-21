@@ -17,6 +17,7 @@ export default function PaymentInfo() {
    <>
  <div className='container'>
     <form onSubmit={handleSubmit(savedata)}>
+      <br/><br/><br/>
 
     <label htmlFor='sd'>Start Date</label><br/>
     <input type='date' id='sd' placeholder='start date' className='form-control'/><br/>
@@ -40,6 +41,8 @@ export default function PaymentInfo() {
     <input type='text' id='ia' placeholder='is applicable' className='form-control'/><br/>
 
     <input type='submit' className='btn btn-outline-success' value={'SAVE DATA'}/>
+    <br/><br/><br/>
+
 
 
 

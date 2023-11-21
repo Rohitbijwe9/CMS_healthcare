@@ -17,6 +17,8 @@ export default function ServiceProviderBill () {
    <>
  <div className='container'>
     <form onSubmit={handleSubmit(savedata)}>
+    <br/><br/><br/>
+
 
 
     <label htmlFor='spc'>Service Provider Code</label><br/>
@@ -53,6 +55,8 @@ export default function ServiceProviderBill () {
 
 
     <input type='submit' className='btn btn-outline-success' value={'SAVE DATA'}/>
+    <br/><br/><br/>
+
 
 
 

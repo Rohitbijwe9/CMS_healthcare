@@ -17,7 +17,7 @@ export default function Claim() {
    <>
 
   <div className='container'>
-    <form onSubmit={handleSubmit(savedata)}>
+    <form onSubmit={handleSubmit(savedata)}><br/><br/><br/>
 
     
 
@@ -226,7 +226,7 @@ export default function Claim() {
       {...register('bank_details')}/><br/>
 
 
-      <input type='submit' className='btn btn-outline-success' value={'SAVE DATA'}/>
+      <input type='submit' className='btn btn-outline-success' value={'SAVE DATA'}/><br/><br/><br/>
 
 
 

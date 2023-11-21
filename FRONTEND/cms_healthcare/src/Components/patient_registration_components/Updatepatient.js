@@ -1,67 +1,45 @@
 import axios from 'axios';
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function PatientUpdate() {
+    const { pk } = useParams();
+    const redirect = useNavigate();
+    const { register, handleSubmit, control, reset } = useForm();
 
-    const{pk}=useParams();
-
-    const redirect=useNavigate();
-
-    const{register,handleSubmit,setValue}=useForm({});
-
-   async function fetchuser()
-    {
-        const result=await axios.get(`http://127.0.0.1:8000/patientreg/patient/${pk}/`)
-        setValue('eid',result.data.eid)
-        setValue('ename',result.data.ename)
-        setValue('phone',result.data.phone)
-        setValue('mail',result.data.mail)
-        setValue('add',result.data.add)
-        setValue('photo',result.data.photo)
-
-
+    async function fetchUser() {
+        try {
+            const result = await axios.get(`http://127.0.0.1:8000/patientreg/patient/${pk}/`);
+            const { patient_image, patient_aadhar_card_image, ...dataWithoutImages } = result.data;
+            reset(dataWithoutImages);
+        } catch (err) {
+            console.error(err);
+        }
     }
 
-    function savedata(data)
-    {
-        data.photo= data.photo[0]
-        axios.put(`http://127.0.0.1:8000/patientreg/patient/${pk}/`,data,{headers:{'Content-Type':'multipart/form-data'}})
-        redirect('/show')
-
-
+    async function saveData(data) {
+        try {
+            const response = await axios.put(`http://127.0.0.1:8000/patientreg/patient/${pk}/`, data, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+            console.log('Data updated:', response.data);
+            redirect('/show');
+        } catch (error) {
+            console.error('Error updating data:', error);
+        }
     }
 
-    useEffect(()=>{fetchuser()},[])
+    useEffect(() => {
+        fetchUser();
+    }, [pk]);
 
+    return (
+        <>
+        <br/><br/>        <br/><br/>
 
-
-  return (
-   <>
-    <form onSubmit={handleSubmit(savedata)} encType='multipart/form-data' className='container'>
-    <label htmlFor='pcode'>Patient Code</label><br/>
-      <input type='number' id='pcode' placeholder='enter patient code' className='form-control'
-      {...register('patient_code')}/><br/>
-
-      <label htmlFor='cs'>Claim Status</label><br/>
-      <input type='radio' id='ms' value='pending' {...register('claim_status')}/>Pending<b></b><br/><br/>
-      <input type='radio' id='ms' value='success'{...register('claim_status')}/>Success<b></b><br/><br/>
-      <input type='radio' id='ms' value='denied'{...register('claim_status')}/>Denied<b></b><br/><br/>
-
-      <label htmlFor='pfname'>Patient First Name</label><br/>
-      <input type='text' id='pfname' placeholder='enter patient first name' className='form-control'
-      {...register('patient_first_name')}/><br/>
-
-      <label htmlFor='plname'>Patient Last Name</label><br/>
-      <input type='text' id='plname' placeholder='enter patient last name' className='form-control'
-      {...register('patient_last_name')}/><br/>
-
-      <label htmlFor='pmname'>Patient Middle Name</label><br/>
-      <input type='text' id='pmname' placeholder='enter patient middle name' className='form-control'
-      {...register('patient_middle_name')}/><br/>
-
-      <label htmlFor='pprifix'>Patient Name Prifix</label><br/>
+            <form onSubmit={handleSubmit(saveData)} encType='multipart/form-data' className='container'>
+            <label htmlFor='pprifix'>Patient Name Prifix</label><br/>
       <input type='text' id='pprifix' placeholder='enter patient prifix' className='form-control'
       {...register('patient_name_prefix')}/><br/>
 
@@ -127,19 +105,20 @@ export default function PatientUpdate() {
       <input type='text' id='padd' placeholder='enter patientaddress' className='form-control'{...register('patients_add_details')}/><br/>
 
       <label htmlFor='con'>Contact </label><br/>
-      <input type='number' id='con' placeholder='enter contact' className='form-control'{...register('contact_details')}/><br/>
+      <input type='text' id='con' placeholder='enter contact' className='form-control'{...register('contact_details')}/><br/>
 
       
 
 
 
-      <input type='submit' className='btn btn-outline-success' value={'SAVE DATA'}/>
 
 
 
-        
-    </form>    
 
-   </>
-  )
+                <button type='submit' className='btn btn-outline-success'>Save Data</button>
+            </form>
+            <br/><br/>        <br/><br/>
+
+        </>
+    );
 }

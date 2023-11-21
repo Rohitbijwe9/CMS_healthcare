@@ -17,6 +17,8 @@ export default function PaymentInfo() {
    <>
  <div className='container'>
     <form onSubmit={handleSubmit(savedata)}>
+    <br/><br/><br/>
+
 
     <label htmlFor='fan'>From Acount Number</label><br/>
     <input type='number' id='fan' placeholder='from account no' className='form-control'/><br/>
@@ -64,6 +66,8 @@ export default function PaymentInfo() {
     <input type='text' id='st' placeholder='status' className='form-control'/><br/>
 
     <input type='submit' className='btn btn-outline-success' value={'SAVE DATA'}/>
+    <br/><br/><br/>
+
 
 
 </form>

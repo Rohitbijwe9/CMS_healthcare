@@ -171,13 +171,16 @@ class DeleteAppointmentView(APIView):
 class ContactPhoneAPIView(APIView):
     def get(self, request):
         # Get all contact numbers from ContactDetails
-        contact_numbers = ContactDetails.objects.values_list('mobile_number', flat=True)
+        contact_numbers = ContactDetails.objects.values_list('contact_details_id')
+        print('contact no--', contact_numbers)
 
         # Get all appointment contact details
         appointment_contact_details = Appointment.objects.values_list('contact_details__mobile_number', flat=True)
+        print('appointment_contact_det--', appointment_contact_details)
 
         # Get remaining contact numbers that are not associated with any appointments
-        remaining_contact_numbers = contact_numbers.exclude(contact_details_id__in=appointment_contact_details)
+        remaining_contact_numbers = contact_numbers.exclude(mobile_number__in=appointment_contact_details)
+        print('remaining---', remaining_contact_numbers)
 
         # Return the remaining contact numbers in the response
         return Response(remaining_contact_numbers)

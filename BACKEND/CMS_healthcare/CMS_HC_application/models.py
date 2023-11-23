@@ -14,7 +14,7 @@ class ContactDetails(models.Model):
 
 
     def __str__(self):
-        	return f"{self.contact_details_id}"
+        	return f"{self.contact_details_id}---{self.mobile_number}" 
 
 
     

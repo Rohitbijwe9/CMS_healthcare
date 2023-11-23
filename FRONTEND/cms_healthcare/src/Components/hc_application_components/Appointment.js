@@ -31,6 +31,7 @@ export default function Appointment() {
     try {
       // Uncomment the following line if you want to send data to the server
        await axios.post('http://127.0.0.1:8000/hcapp/Appointmentview/', data);
+      // Redirect to the desired page after submission
       navigate('/');
     } catch (error) {
       console.error('Error saving data:', error);

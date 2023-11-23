@@ -25,8 +25,8 @@ function Footer() {
                 </div>
 
                 <div className=" ms-2 d-flex flex-wrap align-items-center flex-column text-center">
-                    <span>Meet Our Doctors</span>
-                    <span>Developers</span>
+                    <NavLink to={"/meetourdoctors"} className="text-light text-decoration-none"><span>Meet Our Doctors</span></NavLink>
+                    <NavLink to={"/developers"} className="text-light text-decoration-none"><span>Developers</span></NavLink>
                     <span>Help</span>
                     <span>License</span>
                     <span>Privacy Policy</span>

@@ -45,7 +45,7 @@ function Home() {
                 </button>
             </NavLink>
             <NavLink to={"/astatus"}>
-                <button className='btn btn-lg rounded-0 border-0 btn-primary p-3' style={{backgroundColor : "#121831"}}>
+                <button className='btn btn-lg rounded-0 border-0 btn-primary p-3 m-3' style={{backgroundColor : "#121831"}}>
                     Check Appointment Status
                 </button>
             </NavLink>

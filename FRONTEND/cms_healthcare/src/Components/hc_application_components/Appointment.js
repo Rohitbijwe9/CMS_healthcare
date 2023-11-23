@@ -1,21 +1,64 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-// import '../../assets/css/Contactdetails.css';
-// import '../../assets/images/Appointment.jpg';
+
 
 export default function Appointment() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm();
   const redirect = useNavigate();
 
-  async function savedata(data) {
-    
-      await axios.post('http://127.0.0.1:8000/hcapp/Appointmentview/', data);
+  const validateAppointmentTime = (time) => {
+    // Extract hours, minutes, and AM/PM from the time
+    const [hours, minutes, ampm] = time.split(/:| /);
 
-        redirect('/admin/showpending');
-    
-  
+    // Convert hours to 24-hour format for comparison
+    const hour = parseInt(hours, 10) + (ampm === 'PM' ? 12 : 0);
+
+    // Check if time is within the allowed range (12:00 PM - 5:00 PM)
+    if (hour < 12 || (hour === 12 && minutes < 0) || hour > 16) {
+      setError('appointment_time', {
+        type: 'validate',
+        message: 'Appointment time must be between 12:00 PM and 5:00 PM',
+      });
+      return false;
+    }
+
+    clearErrors('appointment_time');
+    return true;
+  };
+
+  const validateAppointmentDate = (date) => {
+    // Parse the provided date
+    const selectedDate = new Date(date);
+    const currentDate = new Date();
+
+    // Set the current time to 12:00 PM
+    currentDate.setHours(12, 0, 0, 0);
+
+    // Check if the selected date is in the past or earlier on the same day
+    if (selectedDate < currentDate) {
+      setError('appointment_date', {
+        type: 'validate',
+        message: 'Please select a future date',
+      });
+      return false;
+    }
+
+    clearErrors('appointment_date');
+    return true;
+  };
+
+  async function savedata(data) {
+    const isTimeValid = validateAppointmentTime(data.appointment_time);
+    const isDateValid = validateAppointmentDate(data.appointment_date);
+
+    if (isTimeValid && isDateValid) {
+      const response = await axios.post('http://127.0.0.1:8000/hcapp/Appointmentview/', data);
+      console.log('Form submitted with data:', data);
+
+      redirect('/');
+    }
   }
 
   return (
@@ -50,6 +93,23 @@ export default function Appointment() {
                 placeholder="Contact Reference"
                 {...register('contact_details')}
               />
+
+              {/* dropdown starts */}
+            {
+              <select name="contact" placeholder="Contact Reference" className="form-control shadow-none rounded-0 mt-3" id="id_department">
+                    {
+                      option.map(obj=>{
+                                 
+
+                                <option value="Dermatologists">{obj.contact_details}</option>
+                              
+ 
+                            })
+                    }
+
+                    </select>
+                    }
+              {/* dropdown ends */}
 
               <textarea
                 className="rounded-0 form-control shadow-none mt-3"

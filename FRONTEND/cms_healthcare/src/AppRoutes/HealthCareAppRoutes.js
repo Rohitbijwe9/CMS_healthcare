@@ -44,6 +44,8 @@ import Showpendingappointment from '../Components/Admin/Showpendingappointment'
 import TransactionDetails from '../Components/billing_components/TransactionDetails'
 import AddMorePatientDetails from '../Components/Admin/AddMorePatientDetails'
 import PatientBilling from '../Components/Admin/PatientBilling'
+import MeetOurDoctors from '../Components/Layout/MeetOurDoctors'
+import Developers from '../Components/Layout/Developers'
 
 
 
@@ -79,6 +81,8 @@ export default function HealthCareAppRoutes() {
     <Route path='/' element={<Home/>}/>
     <Route path='/aboutus/' element={<About/>}/>
     <Route path='/contactus/' element={<Contact/>}/>
+    <Route path='/meetourdoctors/' element={<MeetOurDoctors/>}/>
+    <Route path='/developers/' element={<Developers/>}/>
     <Route path='/login/' element={<Login/>}/>
     <Route path='/signup' element={<Signup/>}/>
     <Route path='/astatus' element={<AppointmentStatus/>}/>

@@ -40,7 +40,7 @@ export default function AppointmentStatus() {
 
                                           Thank you for providing us an opportunity to serve you. <br /><br />
 
-                                          Our team has received your appointment application and is reviewing it. The status of the same will be published on the website. <br /><br />
+                                          Our team has received your appointment application. The status of the same will be published on the website. <br /><br />
 
                                           Team CMS Healthcare <br />
                                           +91-1800-0000-00 <br />

@@ -20,7 +20,7 @@ function Login() {
             <button type='submit' className='rounded-3 border-3 btn btn-primary mt-4 mb-5 col-12'>Login</button>
             <div className="text-center text-primary fw-bold">
               <small>New User To CMS HealthCare</small>
-              <a className="text-danger" href="/signup">Signup</a>
+              <a className="text-danger" href="#">Signup</a>
             </div>
           </div>
         </div>

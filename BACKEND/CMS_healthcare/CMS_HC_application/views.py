@@ -160,3 +160,24 @@ class DeleteAppointmentView(APIView):
             return Response({"message": "Appointment deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
         except Appointment.DoesNotExist:
             return Response({"error": "Appointment not found or already deleted"}, status=status.HTTP_404_NOT_FOUND)
+
+
+
+
+
+
+
+
+class ContactPhoneAPIView(APIView):
+    def get(self, request):
+        # Get all contact numbers from ContactDetails
+        contact_numbers = ContactDetails.objects.values_list('mobile_number', flat=True)
+
+        # Get all appointment contact details
+        appointment_contact_details = Appointment.objects.values_list('contact_details__mobile_number', flat=True)
+
+        # Get remaining contact numbers that are not associated with any appointments
+        remaining_contact_numbers = contact_numbers.exclude(contact_details_id__in=appointment_contact_details)
+
+        # Return the remaining contact numbers in the response
+        return Response(remaining_contact_numbers)

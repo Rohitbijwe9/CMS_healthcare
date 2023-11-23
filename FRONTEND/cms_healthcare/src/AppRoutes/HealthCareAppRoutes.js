@@ -86,7 +86,8 @@ export default function HealthCareAppRoutes() {
     <Route path='/diseasedocument' element={<DiseaseDocument/>}/>
 
     <Route path='/login' element={<Login/>}/>
-    <Route path='/signup' element={<Signup/>}/>
+    <Route path='/register' element={<Signup/>}/>
+
 
     <Route path='/astatus' element={<Appointmentstatus/>}/>
     <Route path='/showapprove'element={<Showapproveappintment/>}/>

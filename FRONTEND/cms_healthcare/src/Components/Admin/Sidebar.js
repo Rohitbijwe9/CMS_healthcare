@@ -24,11 +24,7 @@ function Sidebar() {
                                     Dashboard
                                 </NavLink>
                             </li>
-                            <li class="nav-item">
-                                <NavLink className="nav-link" to="/admin/doctors">
-                                    Doctors
-                                </NavLink>
-                            </li>
+                            
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/admin/patients">
                                     Patients
@@ -48,6 +44,16 @@ function Sidebar() {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/admin/patientreg/">
                                   Patient Registration
+                                </NavLink>
+                            </li>
+                            <li class="nav-item">
+                                <NavLink className="nav-link" to="/register">
+                                    Add User
+                                </NavLink>
+                            </li>
+                            <li class="nav-item">
+                                <NavLink className="nav-link" to="/admin/doctors">
+                                    Show User
                                 </NavLink>
                             </li>
                             

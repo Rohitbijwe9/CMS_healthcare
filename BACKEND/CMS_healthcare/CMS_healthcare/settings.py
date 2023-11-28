@@ -11,6 +11,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+#import os
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
+# STATIC_URL = 'static/'
+# MEDIA_URL='/imade/download/'
+# MEDIA_ROOT= BASE_DIR
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,13 +51,19 @@ INSTALLED_APPS = [
     'CMS_patient_sheduling',
     'CMS_tratment',
     'rest_framework',
+    'corsheaders',
     'rest_framework_simplejwt',
     'phonenumber_field',
+    'rest_framework.authtoken',
+
+
 
 ]
 
 AUTH_USER_MODEL = 'CMS_auth.User'
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -129,8 +142,61 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL='/imade/download/'
+MEDIA_ROOT= BASE_DIR
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#for email
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "ayupawar@gmail.com"
+EMAIL_HOST_PASSWORD = "feyowkbmzstbycai"
+
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    # Other backends if needed
+]
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.BasicAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#     ]
+# } 
+
+# from datetime import timedelta
+# SIMPLE_JWT = {
+#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+#     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+#     'SLIDING_TOKEN_LIFETIME': timedelta(days=14),
+#     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=14),
+#     'ALGORITHM': 'HS256',
+# }
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_RATES': {
+        'login': '3/hour'
+    }
+}
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+CORS_ORIGIN_WHITELIST=[
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]

@@ -1,45 +1,4 @@
-// // PasswordResetConfirmation.js
-// import React, { useState } from 'react';
-// import axios from 'axios';
 
-// const PasswordResetConfirmation = () => {
-//   const [password, setPassword] = useState('');
-//   const [message, setMessage] = useState('');
-
-//   const handleResetConfirmation = async () => {
-    
-//     const { uidb64, token } = { uidb64:"", token:"" };
-
-//     // extract uidb64 and token from the URL (you can use a router library for this)
-
-
-//     try {
-//       const response = await axios.post(`http://localhost:8000/password-reset/${uidb64}/${token}/`, {
-//         password,
-//       });
-
-//       setMessage(response.data.message);
-//     }
-    
-//     catch (error) {
-//       setMessage('An error occurred. Please try again.');
-//     }
-//   };
-
-//   return (
-//     <div className='container mt-5 text-center'>
-//       <h2 className='mt-5'>Password Reset Confirmation</h2>
-//       <input
-//         type="password"
-//         placeholder="Enter your new password"
-//         value={password}
-//         onChange={(e) => setPassword(e.target.value)}
-//       /><br></br><br></br>
-//       <button onClick={handleResetConfirmation}>Confirm Password Reset</button>
-//       <p>{message}</p>
-//     </div>
-//   );
-// };
 
 // export default PasswordResetConfirmation;
 import React, { useState } from 'react';

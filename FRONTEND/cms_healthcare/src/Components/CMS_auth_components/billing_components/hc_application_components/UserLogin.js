@@ -23,18 +23,7 @@ function UserLogin() {
   async function SaveData(data)
     {
 
-      
-        //console.log(data);
-      //   await axios.post('http://localhost:8000/loginpage/',data)
-      //   .then(response => {
-      //     console.log(response); // Log the response for further inspection
-      //     navi('/adminDashboard/');
-      // })
-      // .catch(error => {
-      //     console.error('AxiosError:', error);
-      // });
-      //   console.log(data);
-      //   navi('/adminDashboard/')
+    
       try {
          await axios.post('http://localhost:8000/loginpage/', data);
         console.log('Login successful');

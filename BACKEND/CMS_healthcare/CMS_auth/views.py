@@ -2,8 +2,7 @@ import http
 from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import RegisterModelSerializer,LoginSerializer, EmailSerializer, ResetPasswordSerializer#UserSerializer #ContactDetailSerializer,ServiceProviderSerializer
-from CMS_auth.models import User
+from .serializers import RegisterModelSerializer,LoginSerializer, EmailSerializer, ResetPasswordSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status
 from django.contrib.auth import get_user_model
@@ -13,7 +12,7 @@ from rest_framework.authtoken.models import Token
 from .utils import detectUser
 from rest_framework.generics import get_object_or_404
 
-#from rest_framework.permissions import IsAuthenticated
+
 
 class RegisterAPIView(APIView):
     def post(self, request):
@@ -41,9 +40,7 @@ class RegisterAPIView(APIView):
             
             user.save()
  
-            
-           
-           # to_email = serializer.email['email']
+            # to_email = serializer.email['email']
             print(to_email)
             print(name)
             print(password)
@@ -64,16 +61,11 @@ class RegisterAPIView(APIView):
 
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    # def get(self, request):
-
-    #    users = User.objects.all()
-    #    serializer = RegisterModelSerializer(users, many=True)
-    #    return Response(data=serializer.data)
 
     def get(self, request, pk=None):
 
         if pk is not None:
-            # Handle the case for retrieving a specific user with id=pk
+            
             user = get_object_or_404(User, pk=pk)
             serializer = RegisterModelSerializer(user)
             return Response(serializer.data)
@@ -103,26 +95,9 @@ class RegisterAPIView(APIView):
 
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # def patch(self, request, *args, **kwargs):
-    #     id = kwargs.get('pk')
-    #     user = get_object_or_404(User, pk=id)
-    #     serializer = RegisterModelSerializer(user, data=request.data, partial=True)
-
-    #     if serializer.is_valid():
-    #         # Update the user's information
-    #         serializer.save()
-
-    #         # Create a response dictionary
-    #         response_data = {
-    #             'message': 'User information updated successfully',
-    #         }
-
-    #         return Response(data=response_data, status=status.HTTP_200_OK)
-
-    #     return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
 
     def delete(self, request, pk=None):
-        # Check if 'pk' is provided in the URL
         if pk is not None:
             # Retrieve the user with the specified ID
             user = get_object_or_404(User, pk=pk)

@@ -6,8 +6,8 @@ import { NavLink } from 'react-router-dom'
 
 function AdminDashboard() {
   return (
-    <div className='container mb-5 mt-5 pt-5'>
-        <div className="row gx-5">
+    <div className='container mb-5 mt-5 pt-5 text-center'>
+        <div className="row g-5 d-flex ">
             <div className="col">
                 <div className="p-5 bg-info">
                     <i className="dashboardicon bi bi-person-plus-fill"></i>
@@ -31,8 +31,8 @@ function AdminDashboard() {
             </div>
         </div>
 
-        <div className="container mt-5 d-flex justify-content-around">
-            <div className='col-5'>
+        <div className="container mt-5 d-flex flex-column">
+            <div className='m-2'>
                 <table className='table table-primary table-borderless table-hover text-center'>
                     <thead>
                     <tr>
@@ -55,7 +55,7 @@ function AdminDashboard() {
                     </tbody>
                 </table>
             </div>
-            <div className='col-5'>
+            <div className='m-2'>
                 <table className='table table-primary table-hover table-borderless text-center'>
                     <thead>
                     <tr>
@@ -85,4 +85,4 @@ function AdminDashboard() {
   )
 }
 
-export default AdminDashboard
+export default AdminDashboard

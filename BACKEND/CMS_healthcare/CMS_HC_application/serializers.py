@@ -16,7 +16,8 @@ class AppointmentModelSerializer(serializers.ModelSerializer):
 class ContactDetailsModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactDetails
-        fields = ['mobile_number','alternate_mobile_number','email_identifier','alternate_email_identifier']
+        #fields = ['mobile_number','alternate_mobile_number','email_identifier','alternate_email_identifier']
+        fields='__all__'
 
 
 

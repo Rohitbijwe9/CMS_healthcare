@@ -24,8 +24,6 @@ import Footer from '../Components/Layout/Footer'
 import About from '../Components/Layout/About'
 import Contact from '../Components/Layout/Contact'
 import Home from '../Components/Layout/Home'
-import Login from '../Components/signuplogin/Login'
-import Signup from '../Components/signuplogin/Signup'
 import Appointmentstatus from '../Components/hc_application_components/Appointmentstatus'
 import Show from '../Components/patient_registration_components/Showpatient'
 import Showperticular from '../Components/patient_registration_components/Showperticular'
@@ -44,6 +42,22 @@ import RegisterDoctor from '../Components/Admin/RegisterDoctor'
 import AppointmentAdmin from '../Components/Admin/AppointmentAdmin'
 import PatientRegistration from '../Components/Admin/PatientRegistration'
 import Billing from '../Components/Admin/Billing'
+import CombinedForm from '../Components/hc_application_components/contactappointment'
+import MeetOurDoctors from '../Components/Layout/MeetOurDoctors'
+import Developers from '../Components/Layout/Devloper'
+import AddMorePatientDetails from '../Components/Admin/AddMorePatientDetails'
+import ShowUsers from '../Components/Admin/ShowUsers'
+import AppointmentList from '../Components/Doctor/AppointmentList'
+import DoctorDash from '../Components/Doctor/DoctorDash'
+import UserLogin from '../Components/auth_components/billing_components/hc_application_components/UserLogin'
+import UpdateUser from '../Components/auth_components/billing_components/hc_application_components/UpdateUser'
+import DeleteUser from '../Components/auth_components/billing_components/hc_application_components/DeleteUser'
+import PasswordResetForm from '../Components/PasswordReset/PasswordResetForm'
+import PasswordResetConfirmation from '../Components/PasswordReset/PasswordResetConfirmation'
+import ShowUser from '../Components/auth_components/billing_components/hc_application_components/ShowUser'
+
+
+
 
 
 
@@ -57,10 +71,22 @@ export default function HealthCareAppRoutes() {
    <>
   <Header/>
    <Routes>
-    <Route path='/aboutus' element={<About/>}/>
+
+
+    <Route path="/password-request" element={<PasswordResetForm/>} />
+    <Route path="/password-reset/:uidb64/:token" element={<PasswordResetConfirmation/>} />
+
+
     <Route path='/user' element={<User/>}/>
+    <Route path='/showuser' element={<ShowUser/>}/>
+    <Route path='/userlogin' element={<UserLogin/>}/>
+    <Route path='/user/updateuser/:pk' element={<UpdateUser/>}/>
+    <Route path='/user/deleteuser/:pk' element={<DeleteUser/>}/>
+
+      
     <Route path='/contactus' element={<Contact/>}/>
     <Route path='/' element={<Home/>}/>
+    <Route path='aboutus/' element={<About/>}/>
 
 
     <Route path='/hospitalexpensec' element={<HospitalExpenses/>}/>
@@ -85,13 +111,15 @@ export default function HealthCareAppRoutes() {
     <Route path='/disease' element={<Disease/>}/>
     <Route path='/diseasedocument' element={<DiseaseDocument/>}/>
 
-    <Route path='/login' element={<Login/>}/>
-    <Route path='/register' element={<Signup/>}/>
+
+
+    <Route path='/meetourdoctors' element={<MeetOurDoctors/>}/>
+    <Route path='/developers' element={<Developers/>}/>
 
 
     <Route path='/astatus' element={<Appointmentstatus/>}/>
-    <Route path='/showapprove'element={<Showapproveappintment/>}/>
-    <Route path='/showpending' element={<Showpendingappointment/>}/>
+    <Route path='/adm/showapprove'element={<Showapproveappintment/>}/>
+    <Route path='/adm/showpending' element={<Showpendingappointment/>}/>
     <Route path='/approveappointment/:pk' element={<ApproveAppointment/>}/>
     <Route path='/deleteappointment/:pk' element={<Deletappointment/>}/>
 
@@ -103,15 +131,26 @@ export default function HealthCareAppRoutes() {
     <Route path='/updatepatient/:pk/' element={<PatientUpdate/>}/>
 
 
-    <Route path='/admin/sidebar' element={<Sidebar/>}/>
-    <Route path='/admin/admindash' element={<AdminDashboard/>}/>
-    <Route path='/admin/patients' element={<PatientAdmin/>}/>
-    <Route path='/admin/doctors' element={<DoctorAdmin/>}/>
-    <Route path='/admin/registerdoctor' element={<RegisterDoctor/>}/>
-    <Route path='/admin/appointments' element={<AppointmentAdmin/>}/>
-    <Route path='admin/patientreg' element={<PatientRegistration/>}/>
-    <Route path='admin/billing' element={<Billing/>}/>
+    <Route path='/adm/sidebar' element={<Sidebar/>}/>
+    <Route path='/adm/admindash' element={<AdminDashboard/>}/>
+    <Route path='/adm/patients' element={<PatientAdmin/>}/>
+    <Route path='/adm/doctors' element={<DoctorAdmin/>}/>
+    <Route path='/adm/registerdoctor' element={<RegisterDoctor/>}/>
+    <Route path='/adm/appointments' element={<AppointmentAdmin/>}/>
+    <Route path='/adm/patientreg' element={<PatientRegistration/>}/>
+    <Route path='/adm/billing' element={<Billing/>}/>
+    <Route path='/adm/addmore'element={<AddMorePatientDetails/>}/>
+    <Route path='adm/showusers' element={<ShowUsers/>}/>
 
+    
+
+
+    <Route path='contap/' element={<CombinedForm/>}/>
+
+
+    {/* -------------- Doctor ------------- */}
+    <Route path='/doc/appointmentlist' element={<AppointmentList/>}/>
+    <Route path='/doc/doctordash' element={<DoctorDash/>}/>
 
 
 

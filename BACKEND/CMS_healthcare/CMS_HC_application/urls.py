@@ -4,6 +4,7 @@ from CMS_HC_application.views import ContactAPIView,AppointmentAPIView,CheckAppo
 
 
 
+
 urlpatterns=[
     path('contactview/',ContactAPIView.as_view()),
     path('Appointmentview/',AppointmentAPIView.as_view()),

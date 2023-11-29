@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export default function Appointment() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
 
   const [options, setOptions] = useState([]);
@@ -27,11 +27,45 @@ export default function Appointment() {
     fetchData();
   }, []);
 
+  const isDateRequired = (date) => !!date;
+
+  const isDateFuture = (date) => {
+    const today = new Date();
+    today.setDate(today.getDate() + 1); // Ensure at least one day in the future
+    return new Date(date) >= today;
+  };
+
+  const isTimeRequired = (time) => !!time;
+
+  const isTimeValid = (time) => {
+    const startTime = new Date(`01/01/2000 ${time}`);
+    const endTime = new Date(`01/01/2000 17:00`); // 5:00 PM
+    return startTime >= new Date('01/01/2000 12:00') && startTime <= endTime;
+  };
+
   const onSubmit = async (data) => {
     try {
-      // Uncomment the following line if you want to send data to the server
-       await axios.post('http://127.0.0.1:8000/hcapp/Appointmentview/', data);
-      // Redirect to the desired page after submission
+      if (!isDateRequired(data.appointment_date)) {
+        setError('Appointment Date is required.');
+        return;
+      }
+
+      if (!isDateFuture(data.appointment_date)) {
+        setError('Please select a future date for the appointment.');
+        return;
+      }
+
+      if (!isTimeRequired(data.appointment_time)) {
+        setError('Appointment Time is required.');
+        return;
+      }
+
+      if (!isTimeValid(data.appointment_time)) {
+        setError('Appointment time must be between 12:00 PM and 5:00 PM.');
+        return;
+      }
+
+      await axios.post('http://127.0.0.1:8000/hcapp/Appointmentview/', data);
       navigate('/');
     } catch (error) {
       console.error('Error saving data:', error);
@@ -52,46 +86,69 @@ export default function Appointment() {
             </h3>
             <div className="col-12 col-lg-4 m-auto">
               <input
-                className="form-control shadow-none rounded-0 mt-3"
+                className={`form-control shadow-none rounded-0 mt-3 ${errors.appointment_date ? 'is-invalid' : ''}`}
                 type="date"
                 placeholder="Appointment Date"
-                {...register('appointment_date')}
+                {...register('appointment_date', {
+                  required: { value: true, message: 'Appointment Date is required.' },
+                  validate: { futureDate: isDateFuture },
+                })}
               />
+              {errors.appointment_date && (
+                <p className="invalid-feedback">{errors.appointment_date.message}</p>
+              )}
+
               <input
-                className="form-control shadow-none rounded-0 mt-3"
+                className={`form-control shadow-none rounded-0 mt-3 ${errors.appointment_time ? 'is-invalid' : ''}`}
                 type="time"
                 placeholder="Appointment Time"
-                {...register('appointment_time')}
+                {...register('appointment_time', {
+                  required: { value: true, message: 'Appointment Time is required.' },
+                  validate: { validTime: isTimeValid },
+                })}
               />
+              {errors.appointment_time && (
+                <p className="invalid-feedback">{errors.appointment_time.message}</p>
+              )}
+
               <input
-                className="form-control shadow-none rounded-0 mt-3"
+                className={`form-control shadow-none rounded-0 mt-3 ${errors.appointment_for ? 'is-invalid' : ''}`}
                 type="text"
                 placeholder="Appointment For"
-                {...register('appointment_for')}
+                {...register('appointment_for', { required: 'Appointment For is required' })}
               />
+              {errors.appointment_for && (
+                <p className="invalid-feedback">{errors.appointment_for.message}</p>
+              )}
 
               {/* Dropdown for contact details */}
               <select
                 name="contact_details"
                 placeholder="Contact Details"
-                className="form-control shadow-none rounded-0 mt-3"
+                className={`form-control shadow-none rounded-0 mt-3 ${errors.contact_details ? 'is-invalid' : ''}`}
                 id="contact_details"
-                {...register('contact_details')}
+                {...register('contact_details', { required: 'Contact Details is required' })}
               >
                 <option value="" disabled>Select Contact Details</option>
-                {options.map((contactNumber) => (
-                  <option key={contactNumber} value={contactNumber}>
-                    {contactNumber}
+                {options.map((contactDetails) => (
+                  <option key={contactDetails.contact_details_id} value={contactDetails.contact_details_id}>
+                    {`${contactDetails.contact_details_id} - ${contactDetails.mobile_number}`}
                   </option>
                 ))}
               </select>
+              {errors.contact_details && (
+                <p className="invalid-feedback">{errors.contact_details.message}</p>
+              )}
 
               <textarea
-                className="rounded-0 form-control shadow-none mt-3"
+                className={`rounded-0 form-control shadow-none mt-3 ${errors.reason_of_appointment ? 'is-invalid' : ''}`}
                 placeholder="Reason Of Appointment"
                 rows="5"
-                {...register('reason_of_appointment')}
+                {...register('reason_of_appointment', { required: 'Reason Of Appointment is required' })}
               ></textarea>
+              {errors.reason_of_appointment && (
+                <p className="invalid-feedback">{errors.reason_of_appointment.message}</p>
+              )}
             </div>
             <div className="col-12 col-lg-4 m-auto text-center mb-5">
               <button

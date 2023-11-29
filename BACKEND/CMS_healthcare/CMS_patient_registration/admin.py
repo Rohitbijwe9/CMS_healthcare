@@ -14,7 +14,7 @@ class BankdetailsAdmin(admin.ModelAdmin):
 
 @admin.register(Claim)
 class ClaimAdmin(admin.ModelAdmin):
-    list_display=['insurance_code','patient_first_name','patient_last_name','patient_middle_name',
+    list_display=['claim_id','insurance_code','patient_first_name','patient_last_name','patient_middle_name',
                   'patient_code','patient_prefix','patient_suffix','patient_gender','patient_gender',
                   'patient_age_years','patient_age_months','patient_age_days','patient_isprimary',
                   'patient_isrider','service_provider_name','service_provider_code',

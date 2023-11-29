@@ -41,4 +41,4 @@ function AllDoctors() {
   )
 }
 
-export default AllDoctors
+export default AllDoctors

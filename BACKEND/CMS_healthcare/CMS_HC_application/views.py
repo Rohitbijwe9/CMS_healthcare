@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from .models import Appointment, ContactDetails
 from .serializers import AppointmentModelSerializer, ContactDetailsModelSerializer , IsApprovedAppointment
 from django.shortcuts import get_object_or_404
+from django.db.models import Subquery
+
 
 
 class ContactAPIView(APIView):
@@ -18,6 +20,9 @@ class ContactAPIView(APIView):
         serializer = ContactDetailsModelSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            contact_instance = serializer.save()
+            contact_id = contact_instance.contact_details_id
+            print(contact_id)
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -48,6 +53,9 @@ class AppointmentAPIView(APIView):
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+
+
+# Dropdowns
 ### check appointment status
 
 
@@ -166,21 +174,21 @@ class DeleteAppointmentView(APIView):
 
 
 
-
+### API FOR CONTACTDETAILS AND APPOINMENT ONE TO ONE RELATIONSHIP
 
 class ContactPhoneAPIView(APIView):
     def get(self, request):
-        # Get all contact numbers from ContactDetails
-        contact_numbers = ContactDetails.objects.values_list('contact_details_id')
-        print('contact no--', contact_numbers)
+        # Get all contact details from ContactDetails
+        contact_details = ContactDetails.objects.all()
 
-        # Get all appointment contact details
-        appointment_contact_details = Appointment.objects.values_list('contact_details__mobile_number', flat=True)
-        print('appointment_contact_det--', appointment_contact_details)
+        # Get contact details associated with appointments
+        appointment_contact_details = Appointment.objects.values_list('contact_details__contact_details_id', flat=True)
+        
+        # Get remaining contact details that are not associated with any appointments
+        remaining_contact_details = contact_details.exclude(contact_details_id__in=Subquery(appointment_contact_details))
 
-        # Get remaining contact numbers that are not associated with any appointments
-        remaining_contact_numbers = contact_numbers.exclude(mobile_number__in=appointment_contact_details)
-        print('remaining---', remaining_contact_numbers)
+        # Serialize the contact details
+        serializer = ContactDetailsModelSerializer(remaining_contact_details, many=True)
 
-        # Return the remaining contact numbers in the response
-        return Response(remaining_contact_numbers)
+        # Return the serialized data in the response
+        return Response(serializer.data)

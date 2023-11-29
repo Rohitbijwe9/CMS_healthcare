@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'CMS_healthcare.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'CMS_helthcare',
+        'NAME': 'cms_healthcare',
         'USER':'root',
         'PASSWORD':'root',
     }
@@ -153,4 +153,27 @@ CORS_ALLOWED_ORIGINS = [
     
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+]
+
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_RATES': {
+        'login': '3/hour'
+    }
+}
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+CORS_ORIGIN_WHITELIST=[
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
 ]

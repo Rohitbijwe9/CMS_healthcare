@@ -1,38 +1,46 @@
-import React from 'react'
-import {useForm} from 'react-hook-form'
+import React,{useEffect} from 'react'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import {useForm} from 'react-hook-form';
+import { useNavigate, useParams } from 'react-router-dom';
 
+function UpdateUser() {
 
-export default function Signup() {
-
-
-    const {register, handleSubmit} = useForm();
+    const{pk} = useParams();
 
     const navi = useNavigate();
-    
+
+    const {register, handleSubmit, setValue} = useForm();
+    async function fetchUser()
+    {
+        const result= await axios.get(`http://localhost:8000/user/${pk}/`);
+        setValue('first_name', result.data.first_name)
+        setValue('last_name', result.data.last_name)
+        setValue('username', result.data.username)
+        setValue('password', result.data.password)
+        setValue('email', result.data.email)
+        setValue('user_type', result.data.user_type)
+        setValue('user_code', result.data.user_code)
+        setValue('user_image', result.data.user_image)
+        setValue('is_active', result.data.is_active)
+        setValue('created_on', result.data.created_on)
+        setValue('updated_on', result.data.updated_on)
+    }
 
     function SaveData(data)
     {
-
-      data.user_image= data.user_image[0]
-        //console.log(data);
-        axios.post('http://localhost:8000/user/',data,{headers:{'Content-Type':'multipart/form-data'}})
-        .then(response => {
-          console.log(response); // Log the response for further inspection
-          navi('/showuser');
-      })
-      .catch(error => {
-          console.error('AxiosError:', error);
-      });
-        console.log(data);
-        navi('/showuser')
+        data.user_image= data.user_image[0]
+        axios.put(`http://localhost:8000/user/${pk}/`,data,{headers:{'Content-Type':'multipart/form-data'}});
+        navi('/showuser');
     }
+
+    useEffect(()=>{
+        fetchUser()
+    },[])
   return (
     <>
-        <div className='container'>
-    <form onSubmit={handleSubmit(SaveData)}><br/><br/><br/>
-      <center><h1>User Registration</h1></center>
+    <div className='container'>
+    <form onSubmit={handleSubmit(SaveData)}>
+      <center><h1 style={{ color: "royalblue", marginTop: "10px"}}>User Registration</h1></center>
 
       <label htmlFor='ufname'>User First Name</label><br/>
       <input type='text' id='ufname' placeholder='enter user first name' className='form-control'{...register('first_name')}/><br/>
@@ -85,10 +93,12 @@ export default function Signup() {
       <label htmlFor='up'>Updated On</label><br/>
         <input type="datetime-local" id='up' className='form-control'{...register('updated_on')}/><br/>
 
-        <input type='submit' className='btn btn-outline-success' value={'SAVE DATA'}/>
-        <input type='reset' className='btn btn-outline-success' value={'RESET'}/>
-    </form><br/><br/><br/>
-  </div>
+       <input type='submit' className='btn btn-outline-warning' value='Update User' style={{ marginRight: '30px' }}/>
+       <input type='reset' className='btn btn-outline-warning' value='RESET'/>
+    </form>
+    </div> 
     </>
   )
 }
+
+export default UpdateUser

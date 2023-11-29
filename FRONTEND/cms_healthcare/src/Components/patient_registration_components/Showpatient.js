@@ -41,20 +41,20 @@ export default function Showpatient() {
             {
                 user.map(obj=>{return(
                     <tr>
-                        <td><img src={`http://localhost:8000${obj.patient_image}`} width="100px" height="100px" alt='patient'/></td>
+                        <td><img src={`http://localhost:8000${obj.patient_image}`} width="50px" height="50px" alt='patient'/></td>
                         <td>{obj.patient_code}</td>
                         <td>{obj.patient_first_name}</td>
                         <td>{obj.patient_last_name}</td>
                         <td>{obj.contact_details}</td>
                         <td>
                             <tr>
-                            <NavLink to={`/showper/${obj.personal_identifier}`}><button className='btn'><i className="appointmenticon bi bi-eye-fill"></i></button></NavLink>
+                            <NavLink to={`/showper/${obj.personal_identifier}`}><button className='btn'><i className="bi bi-eye-fill"></i></button></NavLink>
 
 
-                           <NavLink to={`/updatepatient/${obj.personal_identifier}/`}> <button className='btn'><i className="appointmenticon bi bi-pen-fill"></i> 
+                           <NavLink to={`/updatepatient/${obj.personal_identifier}/`}> <button className='btn'><i className="bi bi-pen-fill"></i> 
                            </button></NavLink>
 
-                           <NavLink to={`/deletepatient/${obj.personal_identifier}/`}><button className='btn'><i className="appointmenticon bi bi-archive-fill"></i>
+                           <NavLink to={`/deletepatient/${obj.personal_identifier}/`}><button className='btn'><i className="bi bi-archive-fill"></i>
                            </button></NavLink>
                            
                            

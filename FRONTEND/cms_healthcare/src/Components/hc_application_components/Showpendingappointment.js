@@ -1,14 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import DoneIcon from '@mui/icons-material/Done';
 import '../../assets/css/pendingappointment.css';
 
 
 
 
-import { faEdit, faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function Showpendingappointment() {
@@ -26,13 +23,13 @@ export default function Showpendingappointment() {
     useEffect(()=>{fetchdata()},[])
   return (
     <>
-        <div className="Login container-fluid form-container">
+        <div className="Login container text-center form-container">
         <br/><br/><br/>
 
             <center><h2>Pending Appointments List</h2></center>
             <br/>
 
-    <table className='table table-stipped'>
+    <table className='table table-stipped table-dark'>
         <thead>
             <tr>
                 <th>Appointment Identifier</th>
@@ -65,12 +62,12 @@ export default function Showpendingappointment() {
 
 
                             <td>
-                            <NavLink to={`/deleteappointment/${obj.appointment_identifier}/`}><button className='btn btn-danger'><FontAwesomeIcon icon={faTrash} /> 
+                            <NavLink to={`/deleteappointment/${obj.appointment_identifier}/`}><button className='btn text-danger'><i class="bi bi-archive-fill"></i>
                            </button></NavLink>
                            </td>
 
                            <td>
-                           <NavLink to={`/approveappointment/${obj.appointment_identifier}`}><DoneIcon className="green-checkmark" /></NavLink>
+                           <NavLink to={`/approveappointment/${obj.appointment_identifier}`}><i class="bi bi-check-circle-fill text-success"></i></NavLink>
                            </td>
                            
 

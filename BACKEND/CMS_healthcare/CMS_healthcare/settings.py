@@ -43,10 +43,12 @@ INSTALLED_APPS = [
     'CMS_patient_registration',
     'CMS_patient_sheduling',
     'CMS_tratment',
+    'Contactus',
     'rest_framework',
     'rest_framework_simplejwt',
     'phonenumber_field',
     'corsheaders',
+    'rest_framework_simplejwt.token_blacklist'
     
 ]
 

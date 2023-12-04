@@ -3,24 +3,40 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import '../../assets/css/pendingappointment.css';
 
+export default function ShowPendingAppointment() {
+  const [user, setuser] = useState([]);
+  const navigate = useNavigate();
 
+  async function fetchdata() {
+    try {
+      // Retrieve the access token from wherever it's stored (e.g., sessionStorage)
+      const accessToken = sessionStorage.getItem('access');
 
+      if (!accessToken) {
+        // Redirect to login page or handle the absence of an access token
+        navigate('/login');
+        return;
+      }
 
+      const result = await axios.get('http://127.0.0.1:8000/hcapp/checkpending/', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
-
-export default function Showpendingappointment() {
-    const[user,setuser]=useState([]);
-
-    const redirect=useNavigate()
-
-    async function fetchdata()
-    {
-        const result=await axios.get('http://127.0.0.1:8000/hcapp/checkpending/')
-        setuser(result.data)
-        console.log(result.data)
+      setuser(result.data);
+      console.log(result.data);
+    } catch (error) {
+      // Handle errors, e.g., unauthorized (401)
+      console.error('Error fetching data:', error.message);
+      // Redirect to login page or handle the error in a different way
+      navigate('/login');
     }
+  }
+  useEffect(() => {
+    fetchdata();
+  }, []);
 
-    useEffect(()=>{fetchdata()},[])
   return (
     <>
         <div className="Login container text-center form-container">

@@ -25,23 +25,14 @@ function PatientAdmin() {
                 </div>
             </div>
 
-            {/* <div class="card text-dark bg-info m-3 border-0 px-5" style={{maxWidth : "18rem"}}>
+            <div class="card text-dark bg-info m-3 border-0 px-5" style={{maxWidth : "18rem"}}>
                 <div class="card-body text-center">
-                    <h6 class="card-title text-light">Approve Patients</h6>
-                    <NavLink to={"/adm/showpending"}>
-                        <i className="appointmenticon bi bi-check"></i>
+                    <h6 class="card-title text-light">Claims Related</h6>
+                    <NavLink to={"/adm/claimdashboard"}>
+                        <i className="appointmenticon bi bi-list-stars"></i>
                     </NavLink>
                 </div>
             </div>
-            <div class="card text-dark bg-info m-3 border-0 px-5" style={{maxWidth : "18rem"}}>
-                <div class="card-body text-center">
-                    <h6 class="card-title text-light">Approved Patients</h6>
-                    <NavLink to={"/adm/showapprove"}>
-                        <i className="appointmenticon bi bi-check-all"></i>
-                    </NavLink>
-                </div>
-            </div> */}
-            
             <div class="card text-dark bg-info m-3 border-0 px-5" style={{maxWidth : "18rem"}}>
                 {/* <div class="card-header">Header</div> */}
                 <div class="card-body text-center">
@@ -49,6 +40,15 @@ function PatientAdmin() {
                     <NavLink to={"/adm/billing"}>
                         {/* <i className="appointmenticon bi bi-receipt-cutoff"></i> */}
                         <i className="appointmenticon bi bi-currency-rupee"></i>
+                    </NavLink>
+                </div>
+            </div>
+            <div class="card text-dark bg-info m-3 border-0 px-5" style={{maxWidth : "28rem"}}>
+                {/* <div class="card-header">Header</div> */}
+                <div class="card-body text-center">
+                    <h6 class="card-title text-light">Discharge Patient</h6>
+                    <NavLink to={""}>
+                        <i className="appointmenticon bi bi-person-walking"></i>
                     </NavLink>
                 </div>
             </div>

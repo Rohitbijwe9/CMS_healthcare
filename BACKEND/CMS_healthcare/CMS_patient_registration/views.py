@@ -11,23 +11,28 @@ from CMS_billing.models import InsurancePayerDetails
 from CMS_HC_application.serializers import ContactDetailsModelSerializer
 from CMS_patient_registration.serializer import AddressDetailsModelSerializer,BankDetailsModelSerializer
 from CMS_billing.serializers import InsurancePayerDetailsSerializers
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 
 class AddressDetailsApiView(APIView):
+    authentication_classes = [JWTAuthentication]  # Add JWT authentication
+    permission_classes = [IsAuthenticated]  # Enforce authentication for all methods
+
     def get(self, request):
-        AddressDetailss = AddressDetails.objects.all()
-        serializer = AddressDetailsModelSerializer(AddressDetailss, many=True)
+        # Your existing code for fetching and serializing data
+        address_details = AddressDetails.objects.all()
+        serializer = AddressDetailsModelSerializer(address_details, many=True)
         return Response(serializer.data)
 
-    def post(self,request):
+    def post(self, request):
+        # Your existing code for deserializing, saving, and responding to POST requests
         serializer = AddressDetailsModelSerializer(data=request.data)
         if serializer.is_valid():
-             serializer.save()
-             return Response(data=serializer.data)
-        return Response(data=serializer.errors)
-
-
+            serializer.save()
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PatientApiView(APIView):
      def get(self,request):

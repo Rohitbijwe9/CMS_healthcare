@@ -7,10 +7,13 @@ from .models import Appointment, ContactDetails
 from .serializers import AppointmentModelSerializer, ContactDetailsModelSerializer , IsApprovedAppointment
 from django.shortcuts import get_object_or_404
 from django.db.models import Subquery
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 
 class ContactAPIView(APIView):
+    
     def get(self, request):
         contacts = ContactDetails.objects.all()
         serializer = ContactDetailsModelSerializer(contacts, many=True)
@@ -27,6 +30,7 @@ class ContactAPIView(APIView):
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class AppointmentAPIView(APIView):
+
     def get(self, request):
         appointments = Appointment.objects.all()
         serializer = AppointmentModelSerializer(appointments, many=True)
@@ -75,8 +79,8 @@ class CheckAppointmentStatus(APIView):
 
 
 class CheckApproveAppointment(APIView):
-   
-    permission_classes = [IsApprovedAppointment]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated, IsApprovedAppointment]
 
     def get(self, request):
         try:
@@ -89,39 +93,35 @@ class CheckApproveAppointment(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Appointment.DoesNotExist:
             return Response({"error": "No approved appointments found"}, status=status.HTTP_404_NOT_FOUND)
-        
-    
+
 
 
         
     
 ##check pendding appointment list
-
 class CheckPendingAppointment(APIView):
-   
-    permission_classes = [IsApprovedAppointment]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated, IsApprovedAppointment]
 
     def get(self, request):
         try:
-            # Filter for approved appointments
+            # Filter for pending appointments
             pending_appointments = Appointment.objects.filter(a_status='pending')
-            
-            # Serialize the approved appointments
+
+            # Serialize the pending appointments
             serializer = AppointmentModelSerializer(pending_appointments, many=True)
-            
+
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Appointment.DoesNotExist:
             return Response({"error": "No pending appointments found"}, status=status.HTTP_404_NOT_FOUND)
-        
-    
-
-
 
 
 
 ###for approve appointment
 
 class ApproveAppointmentView(APIView):
+    authentication_classes=[JWTAuthentication]
+    permission_classes=[IsAuthenticated,]
     def get(self, request, appointment_identifier):
         try:
             appointment = Appointment.objects.get(appointment_identifier=appointment_identifier)
@@ -146,6 +146,8 @@ class ApproveAppointmentView(APIView):
 #for delete appointment
 
 class DeleteAppointmentView(APIView):
+    authentication_classes=[JWTAuthentication]
+    permission_classes=[IsAuthenticated,]
     def get(self, request, pk=None):
         if pk:
             # If a specific 'pk' is provided, try to retrieve and serialize the appointment

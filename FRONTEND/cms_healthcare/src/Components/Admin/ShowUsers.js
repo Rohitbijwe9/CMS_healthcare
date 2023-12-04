@@ -20,11 +20,22 @@ function ShowUsers() {
                 {/* <div class="card-header">Header</div> */}
                 <div class="card-body text-center">
                         <h6 class="card-title text-light">All Doctors</h6>
-                    <NavLink to={"/adm/alldoctors"}>
+                    <NavLink to={"/adm/showdoctors"}>
                         <i className="appointmenticon bi bi-person-lines-fill"></i>
                     </NavLink>
                 </div>
             </div>
+
+            <div class="card text-dark bg-info m-3 border-0 px-5" style={{maxWidth : "18rem"}}>
+                {/* <div class="card-header">Header</div> */}
+                <div class="card-body text-center">
+                        <h6 class="card-title text-light">Receptionists</h6>
+                    <NavLink to={"/adm/showreceptionist"}>
+                        <i className="appointmenticon bi bi-person-lines-fill"></i>
+                    </NavLink>
+                </div>
+            </div>
+
             <div class="card text-dark bg-info m-3 border-0 px-5" style={{maxWidth : "18rem"}}>
                 {/* <div class="card-header">Header</div> */}
                 <div class="card-body text-center">
@@ -38,7 +49,7 @@ function ShowUsers() {
                 {/* <div class="card-header">Header</div> */}
                 <div class="card-body text-center">
                     <h6 class="card-title text-light">All Nurses</h6>
-                    <NavLink>
+                    <NavLink to={'/adm/shownurse'}>
                         <i className="appointmenticon bi bi-person-check-fill"></i>
                     </NavLink>
                 </div>
@@ -47,7 +58,7 @@ function ShowUsers() {
                 {/* <div class="card-header">Header</div> */}
                 <div class="card-body text-center">
                     <h6 class="card-title text-light">All Wardboys</h6>
-                    <NavLink>
+                    <NavLink to={'/adm/showwardboy'}>
                         <i className="appointmenticon bi bi-person-vcard-fill"></i>
                     </NavLink>
                 </div>

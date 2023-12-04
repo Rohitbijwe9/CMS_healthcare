@@ -5,7 +5,7 @@ import Slide2 from '../../assets/images/slide2.jpg';
 import Slide3 from '../../assets/images/slide3.jpg';
 import Slide4 from '../../assets/images/slide4.jpg';
 import '../../assets/css/Home.css';
-
+import { user_type } from '../auth_components/billing_components/hc_application_components/UserLogin';
 function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -15,7 +15,7 @@ function Home() {
     const timer = setInterval(() => {
       // Calculate the index of the next slide
       const nextSlide = activeSlide + 1;
-
+      
       // Check if it's the last slide, reset to the first slide
       if (nextSlide === slideImages.length) {
         setActiveSlide(0);

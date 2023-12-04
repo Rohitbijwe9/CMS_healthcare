@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import{Route, Routes} from 'react-router-dom'
 import User from '../Components/auth_components/billing_components/hc_application_components/User'
 import HospitalExpenses from '../Components/billing_components/HospitalExpenses'
@@ -55,6 +55,12 @@ import DeleteUser from '../Components/auth_components/billing_components/hc_appl
 import PasswordResetForm from '../Components/PasswordReset/PasswordResetForm'
 import PasswordResetConfirmation from '../Components/PasswordReset/PasswordResetConfirmation'
 import ShowUser from '../Components/auth_components/billing_components/hc_application_components/ShowUser'
+import Logout from '../Components/auth_components/billing_components/hc_application_components/Logout'
+import ShowDoctors from '../Components/auth_components/billing_components/hc_application_components/ShowDoctors'
+import ShowReceptionist from '../Components/auth_components/billing_components/hc_application_components/ShowReceptionist'
+import ShowWardBoy from '../Components/auth_components/billing_components/hc_application_components/ShowWardBoy'
+import ShowNurse from '../Components/auth_components/billing_components/hc_application_components/ShowNurse'
+import ClaimDashboard from '../Components/Admin/ClaimDashboard'
 
 
 
@@ -67,9 +73,12 @@ import ShowUser from '../Components/auth_components/billing_components/hc_applic
 
 
 export default function HealthCareAppRoutes() {
+
+    const [userRole,setUserRole] = useState(" ")
+
   return (
    <>
-  <Header/>
+  <Header userRole={userRole} setUserRole={setUserRole}/>
    <Routes>
 
 
@@ -79,9 +88,16 @@ export default function HealthCareAppRoutes() {
 
     <Route path='/user' element={<User/>}/>
     <Route path='/showuser' element={<ShowUser/>}/>
-    <Route path='/userlogin' element={<UserLogin/>}/>
+    <Route path='/userlogin' element={<UserLogin setUserRole={setUserRole}/>}/>
     <Route path='/user/updateuser/:pk' element={<UpdateUser/>}/>
     <Route path='/user/deleteuser/:pk' element={<DeleteUser/>}/>
+    <Route path='/logout' element={<Logout/>}/>
+
+    <Route path='/adm/showusers' element={<ShowUsers/>}/>
+    <Route path='/adm/showdoctors' element={<ShowDoctors/>}/>
+    <Route path='/adm/showreceptionist' element={<ShowReceptionist/>}/>
+    <Route path='/adm/showwardboy' element={<ShowWardBoy/>}/>
+    <Route path='/adm/shownurse' element={<ShowNurse/>}/>
 
       
     <Route path='/contactus' element={<Contact/>}/>
@@ -141,6 +157,8 @@ export default function HealthCareAppRoutes() {
     <Route path='/adm/billing' element={<Billing/>}/>
     <Route path='/adm/addmore'element={<AddMorePatientDetails/>}/>
     <Route path='adm/showusers' element={<ShowUsers/>}/>
+    <Route path='/adm/claimdashboard' element={<ClaimDashboard/>}/>
+    
 
     
 

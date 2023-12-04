@@ -1,32 +1,49 @@
+// Import necessary dependencies
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
 function ApproveAppointment() {
   const { pk } = useParams();
-  const redirect = useNavigate();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Define a function to fetch data
     async function fetchData() {
       try {
-        await axios.get(`http://127.0.0.1:8000/hcapp/approveappointment/${pk}/`);
+        // Get the access token from sessionStorage
+        const accessToken = sessionStorage.getItem('access');
+
+        // Make an authenticated request to approve the appointment
+        await axios.get(`http://127.0.0.1:8000/hcapp/approveappointment/${pk}/`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        // Stop loading and redirect to the appropriate page
         setIsLoading(false);
-        redirect('/adm/showpending');
+        navigate('/adm/showpending');
       } catch (error) {
         console.error('Error while approving appointment:', error);
-        setIsLoading(false); // Stop loading even if there's an error
+
+        // Stop loading even if there's an error
+        setIsLoading(false);
       }
     }
 
+    // Call the fetchData function
     fetchData();
-  }, [pk, redirect]);
+  }, [pk, navigate]);
 
+  // If still loading, display a loading message
   if (isLoading) {
-    return <div>Loading...</div>; // Render a loading message while waiting for the Promise to resolve
+    return <div>Loading...</div>;
   }
 
-  return null; // Or return any other desired content
+  // Return null or any other desired content after approval
+  return <div>Appointment Approved!</div>;
 }
 
 export { ApproveAppointment };

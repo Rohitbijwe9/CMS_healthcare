@@ -2,7 +2,7 @@ import http
 from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from CMS_auth.serializer import RegisterModelSerializer,LoginSerializer, EmailSerializer, ResetPasswordSerializer
+from CMS_auth.serializer import RegisterModelSerializer,LoginSerializer, EmailSerializer, ResetPasswordSerializer,GetUser_typeModelSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status
 from django.contrib.auth import get_user_model
@@ -14,11 +14,31 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework import generics, status, viewsets, response
+from rest_framework.exceptions import ValidationError
+from django.contrib.auth import get_user_model
+from django.contrib.auth.tokens import default_token_generator
+from django.urls import reverse
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.core.mail import EmailMessage
+from . import serializer
+from django.utils.http import urlsafe_base64_decode
+from rest_framework_simplejwt.exceptions import TokenError
+import logging
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 
+User = get_user_model()
+
+
+
+# ------FOR SIGNUP NEW USER----------
 
 class RegisterAPIView(APIView):
+    
     def post(self, request):
         serializer = RegisterModelSerializer(data=request.data)
 
@@ -122,6 +142,8 @@ class RegisterAPIView(APIView):
             }
             return Response(data=response_data, status=status.HTTP_400_BAD_REQUEST)
 
+
+## -----FOR LOGIN USER----
 class LoginAPIView(TokenObtainPairView):
     
     def post(self,request):
@@ -148,18 +170,9 @@ class LoginAPIView(TokenObtainPairView):
             return Response(data=serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
 
-from rest_framework import generics, status, viewsets, response
-from rest_framework.exceptions import ValidationError
-from django.contrib.auth import get_user_model
-from django.contrib.auth.tokens import default_token_generator
-from django.urls import reverse
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
-from django.core.mail import EmailMessage
-from . import serializer
 
-User = get_user_model()
 
+# ----- FOR RESET PASSWORD MAIL--------
 
 class PasswordReset(generics.GenericAPIView):
     """
@@ -201,8 +214,7 @@ class PasswordReset(generics.GenericAPIView):
             raise ValidationError({"email": "User doesn't exists"})
 
 
-
-from django.utils.http import urlsafe_base64_decode
+# ---------FOR RESET PASSWORD--------
 
 class ResetPasswordAPI(generics.GenericAPIView):
     """
@@ -262,17 +274,48 @@ class ResetPasswordAPI(generics.GenericAPIView):
             raise ValidationError({"detail": ["Invalid token"]})
     
 
-
+# ---------LOGOUT---------
 
 class LogoutAPIView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated,]
+    def post(sef,request):
+        print(request.data)
         try:
-            refresh_token = request.data["refresh_token"]
+            refresh_token = request.data['refresh']  # refresh is used as key for refresh token, which is included in request body.
             token = RefreshToken(refresh_token)
+            print(token)
             token.blacklist()
+            print('logout')
+            
+            return Response(data = {'message':'your account is successfully logouted'},status=status.HTTP_205_RESET_CONTENT)
+        
+        except TokenError:
+            return Response(data={'message':'Token is invalid or expired'}, status=status.HTTP_400_BAD_REQUEST)
 
-            return Response(data={"detail": "Logout successful"}, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response(data={"detail": "Invalid or expired token"}, status=status.HTTP_400_BAD_REQUEST)
+
+# -------FOR GET USER TYPE AND USERNAME--------
+
+
+class Get_UserClassName(APIView):
+    def get(self, request, username=None):
+        if username is not None:
+            user = get_object_or_404(User, username=username)
+            serializer = RegisterModelSerializer(user)
+            return Response({
+                'user_type': serializer.data['user_type'],
+                'username': serializer.data['username'],
+                'user_image': serializer.data['user_image']
+            })
+        else:
+            users = User.objects.all()
+            serializer = RegisterModelSerializer(users, many=True)
+            users_data = [
+                {
+                    'user_type': user_data['user_type'],
+                    'username': user_data['username'],
+                    'user_image': user_data['user_image']
+                }
+                for user_data in serializer.data
+            ]
+            return Response(users_data)

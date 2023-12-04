@@ -1,9 +1,20 @@
-import React,{useState} from 'react'
+import React,{useContext,  useState} from 'react'
 import {useForm} from 'react-hook-form'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../../../App';
 
-function UserLogin() {
+//export var user_type = 'default_value';
+export var user_name = 'default_value';
+export var user_image = 'default_value';
+export var current_user_link = 'default_value';
+
+
+function UserLogin({setUserRole}) {
+ 
+  
+  
+  const {state, dispatch} = useContext(UserContext);
 
   const {register, handleSubmit, formState: { errors }} = useForm();
   const [loginError, setLoginError] = useState(null);
@@ -22,13 +33,43 @@ function UserLogin() {
 
   async function SaveData(data)
     {
-
-    
+      
+      var current_user_link = `http://localhost:8000/user_type/${data.username}`
+      
+      async function fetchData()
+      {
+        try {
+          const result = await axios.get(current_user_link);
+          setUserRole(result.data.user_type)
+         // user_type = ; // Set user_type
+          user_name = result.data.username;
+          user_image = result.data.user_image;
+          
+          console.log('user_name : ', user_name);
+          console.log('result.data.user_type : ', result.data.user_type);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          // Set a default value for user_type in case of an error
+          //user_type = 'default_user_type';
+          user_name = 'default_user_name';
+        }
+      }
+      
+      fetchData();
+      
       try {
-         await axios.post('http://localhost:8000/loginpage/', data);
+         const result = await axios.post('http://localhost:8000/loginpage/', data);
+         dispatch({type:"USER", payload:true})
+        console.log(result)
+        // Stroe access token in sessionStorage
+        sessionStorage.setItem('access',result.data.access)
+        sessionStorage.setItem('refresh',result.data.refresh)
+        console.log('data.username : ', data.username)
+        console.log('current_user_link : ', current_user_link)
+        navi('/');
         console.log('Login successful');
         // Redirect to dashboard or handle success as needed
-        navi('/adm/admindash');
+        
       } catch (error) {
         console.error('AxiosError:', error);
         // Handle specific error status or show a generic error message
@@ -69,4 +110,4 @@ function UserLogin() {
   );
 }
 
-export default UserLogin;
+export default UserLogin;

@@ -1,8 +1,22 @@
-import React from 'react'
-import Doctor1 from '../../assets/images/doctor1.jpg'
+import React,{useEffect, useState} from 'react'
+import axios from 'axios';
+// import Doctor1 from '../../assets/images/doctor1.jpg'
 import '../../assets/css/About.css'
 
 function MeetOurDoctors() {
+  
+  const [users, setUsers] = useState([]);
+   
+  async function fetchData()
+  {
+      const result= await axios.get('http://localhost:8000/user/');
+      //console.log(result.data);
+      setUsers(result.data)
+  }
+  useEffect(()=>{
+      fetchData()
+  },[])
+
   return (
     <>
     <div className='container text-center mb-5 mt-5 pt-5'>
@@ -36,25 +50,33 @@ function MeetOurDoctors() {
 
         {/* Doctor list below */}
 
-        <h1 className='bigheading'>Meet our doctors</h1>
+        <h1 className='bigheading'>Meet our Doctors</h1>
 
-        <div class="card mb-3 mt-5" >
-            <div class="row g-0 m-5">
-                <div class="col-md-4">
-                <img src={Doctor1} class="img-fluid rounded-start" alt="..." className='rounded-circle' />
-                </div>
-                <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title mb-4">Doctor Name</h5>
-                    <p class="card-text">Department</p>
-                    <p class="card-text">More details...</p>
-                    <p class="card-text">More details...</p>
-                    <p class="card-text">More details...</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-                </div>
-            </div>
-        </div>
+        {
+                    users.map(obj=>{
+                        if (obj.user_type === "Doctor"){
+
+                        return(
+
+                            <div class="card mb-3 mt-5" >
+                                <div class="row g-0 m-5">
+                                    <div class="col-md-4">
+                                    <img src={`http://localhost:8000${obj.user_image}`} alt='...' width="300px" height="300px" className='rounded-circle'/>
+                                    </div>
+                                    <div class="col-md-8">
+                                      <div class="card-body">
+                                          <h5 class="card-title mb-4">{obj.first_name} {obj.last_name}</h5>
+                                          <p class="card-text">Doctor code : {obj.user_code}</p>
+                                          <p class="card-text">Date Joined : {obj.created_on.slice(0, 10)}</p>
+                                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                             )
+                        }
+                    })
+          }
     </div>
     </>
   )

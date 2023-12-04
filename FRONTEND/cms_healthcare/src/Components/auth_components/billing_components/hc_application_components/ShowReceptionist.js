@@ -1,7 +1,9 @@
 import React,{useEffect, useState} from 'react'
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
-function ShowUser() {
+
+
+function ShowReceptionist() {
     const [users, setUsers] = useState([]);
    
     async function fetchData()
@@ -35,10 +37,11 @@ function ShowUser() {
             <tbody>
                 {
                     users.map(obj=>{
+                        if (obj.user_type === "Receptionist"){
 
                         return(
                             <tr>
-                                <td><img src={`http://localhost:8000${obj.user_image}`} width="60px" height="60px" className='rounded-circle' alt='...'/></td>
+                                <td><img src={`http://localhost:8000${obj.user_image}`} alt='...' width="60px" height="60px" className='rounded-circle'/></td>
                                 <td>{obj.first_name}</td>
                                 <td>{obj.last_name}</td>
                                 <td>{obj.username}</td>
@@ -50,11 +53,11 @@ function ShowUser() {
                                 <td>{obj.updated_on}</td>
                                 <td>
                                     <NavLink to={`/user/updateuser/${obj.id}`}><button className='btn'><i className="bi bi-pen-fill"></i></button></NavLink>
-                                    <NavLink to={`/user/deleteuser/${obj.id}`}><button className='btn'><i className="bi bi-archive-fill text-danger"></i></button></NavLink>
+                                    <NavLink to={`/user/deleteuser/${obj.id}`}><button className='btn'><i className="bi bi-archive-fill"></i></button></NavLink>
                                 </td>
                             </tr>
                         )
-                    
+                    }
                     })
                 }
             </tbody>
@@ -64,4 +67,4 @@ function ShowUser() {
   )
 }
 
-export default ShowUser
+export default ShowReceptionist

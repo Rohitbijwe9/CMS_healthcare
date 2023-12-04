@@ -27,18 +27,18 @@ function PatientBilling() {
             <div class="card text-dark bg-info m-3 border-0 px-5" style={{maxWidth : "28rem"}}>
                 {/* <div class="card-header">Header</div> */}
                 <div class="card-body text-center">
-                    <h6 class="card-title text-light">Insurance Payer Details</h6>
-                    <NavLink to={"/insurencepayerdetails"}>
-                        <i className="appointmenticon bi bi-person-rolodex"></i>
+                    <h6 class="card-title text-light">Bank Details</h6>
+                    <NavLink to={"/bankdetails"}>
+                        <i className="appointmenticon bi bi-bank"></i>
                     </NavLink>
                 </div>
             </div>
             <div class="card text-dark bg-info m-3 border-0 px-5" style={{maxWidth : "28rem"}}>
                 {/* <div class="card-header">Header</div> */}
                 <div class="card-body text-center">
-                    <h6 class="card-title text-light">Insurance Details</h6>
-                    <NavLink to={"/insurence"}>
-                        <i className="appointmenticon bi bi-file-text-fill"></i>
+                    <h6 class="card-title text-light">Address Details</h6>
+                    <NavLink to={"/addressdetails"}>
+                        <i className="appointmenticon bi bi-geo-alt-fill"></i>
                     </NavLink>
                 </div>
             </div>
@@ -78,15 +78,7 @@ function PatientBilling() {
                     </NavLink>
                 </div>
             </div>
-            <div class="card text-dark bg-info m-3 border-0 px-5" style={{maxWidth : "28rem"}}>
-                {/* <div class="card-header">Header</div> */}
-                <div class="card-body text-center">
-                    <h6 class="card-title text-light">Discharge Patient</h6>
-                    <NavLink to={""}>
-                        <i className="appointmenticon bi bi-person-walking"></i>
-                    </NavLink>
-                </div>
-            </div>
+            
         </div>
     
     </>

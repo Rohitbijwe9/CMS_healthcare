@@ -87,3 +87,11 @@ class ResetPasswordSerializer(serializers.Serializer):
         user.set_password(password)
         user.save()
         return data
+
+
+
+
+class GetUser_typeModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('user_type','username','user_image')

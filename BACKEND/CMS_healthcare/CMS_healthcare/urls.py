@@ -10,6 +10,7 @@ urlpatterns = [
     path('hcapp/',include('CMS_HC_application.urls')),
     path('bill/',include('CMS_billing.urls')),
     path('',include('CMS_auth.urls')),
+    path('',include('Contactus.urls'))
 
 ]
 

@@ -3,7 +3,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 from CMS_patient_sheduling.models import ServiceProvider
 
 
-
 class HospitalExpenses(models.Model):
     hospital_expenses_identifier = models.BigAutoField(primary_key=True)
     pre_hospital_expenses = models.FloatField(default=0.0)
@@ -23,7 +22,6 @@ class NomineeDetails(models.Model):
     relation_with_insurance_payer = models.CharField(max_length=255)
     nominee_date_of_birth = models.DateField()
     nominee_mobile_number = PhoneNumberField(region='IN')
-
 
 
 class InsurancePayerDetails(models.Model):
@@ -101,7 +99,6 @@ class TransactionDetails(models.Model):
     bank_name=models.CharField(max_length=40)
     branch_name=models.CharField(max_length=30)
     bank_ifsc_code=models.CharField(max_length=20)
-
 
 
 

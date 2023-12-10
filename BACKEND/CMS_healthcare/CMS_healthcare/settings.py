@@ -11,6 +11,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+#import os
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
+# STATIC_URL = 'static/'
+# MEDIA_URL='/imade/download/'
+# MEDIA_ROOT= BASE_DIR
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,17 +51,19 @@ INSTALLED_APPS = [
     'CMS_patient_sheduling',
     'CMS_tratment',
     'rest_framework',
+    'corsheaders',
     'rest_framework_simplejwt',
     'phonenumber_field',
-    'corsheaders',
     'rest_framework.authtoken',
-   
-    
+
+
+
 ]
 
 AUTH_USER_MODEL = 'CMS_auth.User'
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -62,7 +71,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'CMS_healthcare.urls'
@@ -137,17 +145,18 @@ STATIC_URL = 'static/'
 MEDIA_URL='/imade/download/'
 MEDIA_ROOT= BASE_DIR
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#email
+#for email
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "gauravmeshram1993@gmail.com"
-EMAIL_HOST_PASSWORD = 'dseayuuylxdntmkm'
+EMAIL_HOST_PASSWORD = "kpxcxnqpgrvbyasq"
 
 
 AUTHENTICATION_BACKENDS = [
@@ -155,10 +164,21 @@ AUTHENTICATION_BACKENDS = [
     # Other backends if needed
 ]
 
-CORS_ORIGIN_WHITELIST=[
-    'http://localhost:3000'
-]
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.BasicAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#     ]
+# } 
 
+# from datetime import timedelta
+# SIMPLE_JWT = {
+#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+#     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+#     'SLIDING_TOKEN_LIFETIME': timedelta(days=14),
+#     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=14),
+#     'ALGORITHM': 'HS256',
+# }
 from datetime import timedelta
 
 SIMPLE_JWT = {
@@ -171,3 +191,12 @@ REST_FRAMEWORK = {
         'login': '3/hour'
     }
 }
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+CORS_ORIGIN_WHITELIST=[
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]

@@ -1,5 +1,5 @@
 """
-URL configuration for CMS_healthcare project.
+URL configuration for email_project_backend project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -15,31 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/',include('CMS_auth.urls')),
-]
-
-
-'''
-from rest_framework.routers import DefaultRouter
-from CMS_auth.views import UserRegisterAPI #MyTokenObtainPairView
-from CMS_patient_sheduling.models import ServiceProvider
-from CMS_HC_application.models import ContactDetails
-
-from rest_framework_simplejwt.views import token_obtain_pair, token_refresh
-
-router = DefaultRouter()
-#router.register('posts', ViewSet, basename='posts')
-router.register('user', UserRegisterAPI, basename='user')
+from django.urls import path,include
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
-   # path('access/', MyTokenObtainPairView.as_view()),
-    path('refresh/', token_refresh),
-]
-'''
+    path('',include('CMS_auth.urls')),
+]    
+
+if settings.DEBUG:
+    urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
